@@ -15,7 +15,7 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/hero-background.jpg"
+          src="/hero-background.png"
           alt="Hero Background"
           fill
           className="object-cover"
@@ -25,7 +25,7 @@ export default function HeroSection() {
       </div>
       <div className="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
         <SplitText
-          text="ELAIS BERKELANA"
+          text="ELAEIS BERKELANA"
           className="text-8xl font-semibold text-center"
           delay={100}
           duration={0.6}

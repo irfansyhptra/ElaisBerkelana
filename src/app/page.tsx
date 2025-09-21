@@ -13,7 +13,7 @@ const MOCK_POSTS: Post[] = [
     village: "Desa Gayo, Aceh",
     date: "12 September 2025",
     description:
-      "Sebuah perjalanan spiritual menemukan ketenangan di tengah tarian alam dan budaya lokal yang kental. Matahari terbenam di sini bukan sekadar penutup hari, melainkan pembuka tirai pertunjukan semesta.",
+      "Sebuah perjalanan spiritual menemukan ketenangan di tengah tarian alam dan budaya lokal yang kental...",
     youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     imageUrl: "/images/post1.jpg",
   },
@@ -23,7 +23,7 @@ const MOCK_POSTS: Post[] = [
     village: "Desa Takengon, Aceh Tengah",
     date: "28 Agustus 2025",
     description:
-      "Menyesap secangkir kopi arabika asli langsung dari sumbernya sambil diselimuti kabut dingin adalah pengalaman yang tak terlupakan. Desa ini mengajarkan arti kesederhanaan dan kenikmatan.",
+      "Menyesap secangkir kopi arabika asli langsung dari sumbernya sambil diselimuti kabut dingin...",
     youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     imageUrl: "/images/post2.jpg",
   },
@@ -31,30 +31,7 @@ const MOCK_POSTS: Post[] = [
 
 export default function Home() {
   useEffect(() => {
-    // Debug: Log posts to console
     console.log("MOCK_POSTS:", MOCK_POSTS);
-
-    // Optional: Add smooth scroll behavior for enhanced UX
-    const addSmoothScrolling = () => {
-      const links = document.querySelectorAll('a[href^="#"]');
-      links.forEach((link) => {
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          const href = link.getAttribute("href");
-          if (href) {
-            const target = document.querySelector(href);
-            if (target) {
-              target.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-            }
-          }
-        });
-      });
-    };
-
-    addSmoothScrolling();
   }, []);
 
   return (
@@ -66,7 +43,6 @@ export default function Home() {
       <section
         id="journey"
         className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-20"
-        style={{ display: "block", visibility: "visible" }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -87,25 +63,17 @@ export default function Home() {
           </div>
 
           <div className="travel-posts-grid max-w-6xl mx-auto">
-            {MOCK_POSTS.length > 0 ? (
-              MOCK_POSTS.map((post, index) => (
-                <div
-                  key={post._id}
-                  className="transform transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
-                  data-aos="fade-up"
-                  data-aos-delay={300 + index * 200}
-                  data-aos-duration="800"
-                >
-                  <TravelPost post={post} />
-                </div>
-              ))
-            ) : (
-              <div className="col-span-full text-center py-16">
-                <p className="text-gray-500 text-lg">
-                  Belum ada post tersedia.
-                </p>
+            {MOCK_POSTS.map((post, index) => (
+              <div
+                key={post._id}
+                className="transform transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+                data-aos="fade-up"
+                data-aos-delay={300 + index * 200}
+                data-aos-duration="800"
+              >
+                <TravelPost post={post} />
               </div>
-            )}
+            ))}
           </div>
         </div>
       </section>

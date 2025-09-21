@@ -22,7 +22,7 @@ const AboutSection = () => {
             <p className="text-gray-500 mb-2 uppercase tracking-widest">
               Penjelajah & Pencerita
             </p>
-            <p className="text-gray-700 leading-relaxed mb-4">
+            <p className="text-white-700 leading-relaxed mb-4">
               Halo, saya Elais. Perjalanan bagi saya bukan sekadar berpindah
               tempat, melainkan proses menemukan makna di setiap sudut desa yang
               saya singgahi. Website ini adalah catatan digital dari setiap
