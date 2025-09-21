@@ -1,0 +1,112 @@
+/* src/app/globals.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure sections are visible */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for container visibility */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Grid fix for travel posts */
+.travel-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .travel-posts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
+}
+
+/* Hide scrollbar but keep functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Smooth Scroll Snap */
+.scroll-snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.scroll-snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Custom Transitions */
+.section-transition {
+  transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+:root {
+  --color-primary: #2e7d32;
+  --color-secondary: #ff9800;
+  --color-white: #ffffff;
+  --color-background: #f8f9fa;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-gray-900 font-poppins;
+    background-image: url("/hero-background.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+
+  .glass-card {
+    @apply glass rounded-xl p-6 hover:bg-white/20 transition-all duration-300;
+  }
+
+  .glass-navbar {
+    @apply glass sticky top-0 z-50;
+  }
+
+  .btn-primary {
+    @apply bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-full 
+           transition-all duration-300 font-semibold shadow-lg hover:shadow-primary/20;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary hover:bg-secondary/90 text-white px-6 py-2 rounded-full 
+           transition-all duration-300 font-semibold shadow-lg hover:shadow-secondary/20;
+  }
+
+  .section-container {
+    @apply container mx-auto px-4 py-16 max-w-7xl;
+  }
+}
