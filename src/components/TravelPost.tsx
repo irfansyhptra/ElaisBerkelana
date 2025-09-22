@@ -13,26 +13,28 @@ const TravelPost = ({ post }: TravelPostProps) => {
   };
 
   return (
-    <article className="bg-white rounded-lg shadow-xl overflow-hidden">
-      <div className="relative w-full h-64 bg-gray-200">
+    <article className="glass-card-minimal overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group">
+      <div className="relative w-full aspect-video bg-gray-100 overflow-hidden rounded-xl">
         <iframe
           src={getEmbedUrl(post.youtubeUrl)}
           title={post.title}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         ></iframe>
       </div>
-      <div className="p-6">
-        <p className="text-sm text-gray-500 mb-2 font-medium">
+      <div className="p-8">
+        <p className="text-sm text-gray-500 mb-4 font-medium tracking-wide uppercase">
           {post.date} • {post.village}
         </p>
-        <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
+        <h3 className="title-medium text-gray-900 mb-4 group-hover:text-black transition-colors leading-tight">
           {post.title}
         </h3>
-        <p className="text-gray-700 leading-relaxed">{post.description}</p>
+        <p className="text-gray-600 leading-relaxed font-light text-lg">
+          {post.description}
+        </p>
       </div>
     </article>
   );

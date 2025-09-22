@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ClientLayout from "@/components/ClientLayout";
 
-// Konfigurasi font
-const poppins = Poppins({
+// Font configurations
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-poppins", // Opsional, untuk penggunaan via variabel CSS
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -26,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className={poppins.className}>
-      <body className="min-h-screen flex flex-col">
+    <html lang="id" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="min-h-screen flex flex-col bg-white">
         <ClientLayout>
           <Navbar />
           <main className="flex-grow">{children}</main>

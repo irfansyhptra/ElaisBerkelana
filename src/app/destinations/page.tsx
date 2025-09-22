@@ -9,7 +9,7 @@ export default function DestinationsPage() {
     <div className="min-h-screen bg-brand-white pt-20">
       <div className="relative h-[40vh] flex items-center justify-center">
         <Image
-          src="/hero-background.jpg"
+          src="/hero-background.png"
           alt="Destinations Hero"
           fill
           className="object-cover"

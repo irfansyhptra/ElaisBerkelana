@@ -15,20 +15,29 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
   const href = `/destinations/${destination.countryId}/${destination.provinceId}/${destination.slug}`;
 
   return (
-    <motion.div whileHover={{ y: -10 }} className="group">
+    <motion.div
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className="group"
+    >
       <Link href={href}>
-        <div className="glass-card overflow-hidden text-white shadow-lg hover:shadow-2xl transition-shadow duration-300">
-          <div className="relative aspect-video">
+        <div className="glass-card-minimal overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:bg-white/80">
+          <div className="relative aspect-[4/3] overflow-hidden">
             <Image
               src={destination.coverImage}
               alt={destination.village}
               fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500"
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           <div className="p-6">
-            <h3 className="text-xl font-bold mb-2">{destination.village}</h3>
-            <p className="text-white/80">{`${destination.province}, ${destination.country}`}</p>
+            <h3 className="title-medium text-gray-900 mb-2 group-hover:text-black transition-colors">
+              {destination.village}
+            </h3>
+            <p className="text-gray-600 font-light">
+              {`${destination.province}, ${destination.country}`}
+            </p>
           </div>
         </div>
       </Link>
