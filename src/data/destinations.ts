@@ -13,9 +13,9 @@ export const mockDestinations: Destination[] = [
     description: "Sebuah desa yang kaya akan budaya dan tradisi kopi...",
     youtubeUrl: "https://www.youtube.com/watch?v=example1",
     instagramUrl: "https://www.instagram.com/p/C2x-...",
-    coverImage: "/public/images/gayo-1.jpg",
+    coverImage: "/public/images/destinations/gayo.jpg",
     imageGallery: [
-      { url: "/public/images/gayo-1.jpg", caption: "Kebun Kopi" },
+      { url: "/public/images/destinations/gayo.jpg", caption: "Kebun Kopi" },
       { url: "/public/images/gayo-2.jpg", caption: "Upacara Tradisional" },
     ],
     timeline: [
