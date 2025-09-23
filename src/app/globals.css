@@ -111,10 +111,49 @@ section {
   padding-right: 2rem;
 }
 
+/* Full-width container utilities for dramatic layouts */
+.container-fullscreen {
+  width: 100%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.container-ultra-wide {
+  width: 100%;
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 @media (max-width: 768px) {
-  .container {
+  .container,
+  .container-fullscreen,
+  .container-wide,
+  .container-ultra-wide {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-fullscreen {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+  .container-ultra-wide {
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 }
 

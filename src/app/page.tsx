@@ -15,7 +15,7 @@ const MOCK_POSTS: Post[] = [
     description:
       "Sebuah perjalanan spiritual menemukan ketenangan di tengah tarian alam dan budaya lokal yang kental...",
     youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    imageUrl: "/images/post1.jpg",
+    imageUrl: "/images/destinations/gayo.jpg",
   },
   {
     _id: "2",
@@ -25,7 +25,7 @@ const MOCK_POSTS: Post[] = [
     description:
       "Menyesap secangkir kopi arabika asli langsung dari sumbernya sambil diselimuti kabut dingin...",
     youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    imageUrl: "/images/post2.jpg",
+    imageUrl: "/images/destinations/indo.jpg",
   },
 ];
 
@@ -44,9 +44,9 @@ export default function Home() {
         id="journey"
         className="section-minimal bg-gradient-to-b from-white via-gray-50 to-white"
       >
-        <div className="grid-system">
-          <div className="grid-col-12 text-center mb-24">
-            <div className="glass-card-minimal max-w-4xl mx-auto">
+        <div className="w-full px-8 lg:px-16 xl:px-20">
+          <div className="text-center mb-24">
+            <div className="glass-card max-w-5xl mx-auto">
               <h2 className="title-large text-gray-900 mb-6" data-aos="fade-up">
                 Jejak Perjalanan Terbaru
               </h2>
@@ -61,20 +61,18 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid-col-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-              {MOCK_POSTS.map((post, index) => (
-                <div
-                  key={post._id}
-                  className="transform transition-all duration-500 hover:-translate-y-2"
-                  data-aos="fade-up"
-                  data-aos-delay={300 + index * 200}
-                  data-aos-duration="800"
-                >
-                  <TravelPost post={post} />
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            {MOCK_POSTS.map((post, index) => (
+              <div
+                key={post._id}
+                className="transform transition-all duration-500 hover:-translate-y-2"
+                data-aos="fade-up"
+                data-aos-delay={300 + index * 200}
+                data-aos-duration="800"
+              >
+                <TravelPost post={post} />
+              </div>
+            ))}
           </div>
         </div>
       </section>

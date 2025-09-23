@@ -6,7 +6,8 @@ import { useParams } from "next/navigation";
 import { mockProvinces } from "@/data/provinces";
 import { mockDestinations } from "@/data/destinations";
 import { mockCountries } from "@/data/countries";
-import DestinationCard from "@/components/DestinationCard"; // Impor ini sekarang akan berhasil
+import DestinationCard from "@/components/DestinationCard";
+import Image from "next/image";
 
 export default function CountryDestinationsPage() {
   const params = useParams();
@@ -33,48 +34,85 @@ export default function CountryDestinationsPage() {
   }, [currentCountry, selectedProvince]);
 
   if (!currentCountry) {
-    return <div className="pt-24 text-center">Negara tidak ditemukan.</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center px-8">
+        <div className="glass-card max-w-lg mx-auto">
+          <p className="text-gray-600">Negara tidak ditemukan.</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-brand-white pt-20">
-      <div className="container mx-auto px-6 py-12 text-center">
-        <h1 className="text-4xl font-bold">
-          Destinasi di {currentCountry.name}
-        </h1>
+    <div className="min-h-screen relative">
+      {/* Full page background image */}
+      <div className="fixed inset-0 z-0">
+        <Image
+          src="/hero-background.png"
+          alt="Country Background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/35" />
       </div>
-      <div className="container mx-auto px-6 py-8">
-        <div className="mb-8">
-          <select
-            value={selectedProvince}
-            onChange={(e) => setSelectedProvince(e.target.value)}
-            className="p-3 rounded-lg glass text-white bg-black/20 border border-white/20"
-          >
-            <option value="all">Semua Provinsi</option>
-            {provincesInCountry.map((province) => (
-              <option key={province._id} value={province._id}>
-                {province.name}
-              </option>
-            ))}
-          </select>
-        </div>
 
-        {filteredDestinations.length > 0 ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredDestinations.map((destination) => (
-              <DestinationCard
-                key={destination._id}
-                destination={destination}
-              />
-            ))}
+      {/* Content with glassmorphism */}
+      <div className="relative z-10 pt-32 pb-16">
+        <div className="w-full px-8 lg:px-16 xl:px-20">
+          {/* Page title */}
+          <div className="text-center mb-12">
+            <div className="glass-card max-w-4xl mx-auto">
+              <h1 className="title-large text-white">
+                Destinasi di {currentCountry.name}
+              </h1>
+            </div>
           </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-gray-500">
-              Belum ada destinasi untuk provinsi ini.
-            </p>
+
+          {/* Province filter */}
+          <div className="mb-8 flex justify-center">
+            <div className="glass-card-minimal">
+              <select
+                value={selectedProvince}
+                onChange={(e) => setSelectedProvince(e.target.value)}
+                className="p-3 rounded-lg bg-transparent text-white border border-white/30 min-w-[200px] focus:outline-none focus:border-white/50"
+              >
+                <option value="all" className="bg-gray-800">
+                  Semua Provinsi
+                </option>
+                {provincesInCountry.map((province) => (
+                  <option
+                    key={province._id}
+                    value={province._id}
+                    className="bg-gray-800"
+                  >
+                    {province.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        )}
+
+          {/* Destinations grid */}
+          {filteredDestinations.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {filteredDestinations.map((destination) => (
+                <DestinationCard
+                  key={destination._id}
+                  destination={destination}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <div className="glass-card max-w-lg mx-auto">
+                <p className="text-white/80">
+                  Belum ada destinasi untuk provinsi ini.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

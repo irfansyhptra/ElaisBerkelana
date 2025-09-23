@@ -2,9 +2,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Destination } from "@/types";
 import { motion } from "framer-motion";
+import OptimizedImage from "./OptimizedImage";
+import { normalizeImagePath } from "@/utils/imageUtils";
 
 interface DestinationCardProps {
   destination: Destination;
@@ -23,11 +24,11 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
       <Link href={href}>
         <div className="glass-card-minimal overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group-hover:bg-white/80">
           <div className="relative aspect-[4/3] overflow-hidden">
-            <Image
-              src={destination.coverImage}
+            <OptimizedImage
+              src={normalizeImagePath(destination.coverImage)}
               alt={destination.village}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              className="group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
