@@ -1,8 +1,9 @@
-// src/app/destinations/page.tsx
+// src/app/destinations/page.tsx (Diperbaiki)
 "use client";
 import CountryCard from "@/components/CountryCard";
 import { mockCountries } from "@/data/countries";
 import Image from "next/image";
+import { Country } from "@/types"; // Impor tipe
 
 export default function DestinationsPage() {
   return (
@@ -36,7 +37,7 @@ export default function DestinationsPage() {
 
           {/* Countries grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {mockCountries.map((country) => (
+            {mockCountries.map((country: Country) => (
               <CountryCard key={country._id} country={country} />
             ))}
           </div>

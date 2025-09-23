@@ -1,4 +1,4 @@
-// src/components/Navbar.tsx
+﻿// src/components/Navbar.tsx
 "use client";
 
 import Link from "next/link";
@@ -20,7 +20,9 @@ const Navbar = () => {
 
   const navLinks = [
     { href: "/destinations", label: "Destinasi" },
+    { href: "/journal", label: "Jurnal" },
     { href: "/about", label: "Tentang" },
+    { href: "/contact", label: "Kontak" },
   ];
 
   return (

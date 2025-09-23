@@ -1,4 +1,4 @@
-// src/app/destinations/[countryId]/page.tsx
+// src/app/destinations/[countryId]/page.tsx (Diperbaiki)
 "use client";
 
 import { useState, useMemo } from "react";
@@ -8,6 +8,7 @@ import { mockDestinations } from "@/data/destinations";
 import { mockCountries } from "@/data/countries";
 import DestinationCard from "@/components/DestinationCard";
 import Image from "next/image";
+import { Country, Province, Destination } from "@/types"; // Impor tipe
 
 export default function CountryDestinationsPage() {
   const params = useParams();
@@ -15,19 +16,21 @@ export default function CountryDestinationsPage() {
   const [selectedProvince, setSelectedProvince] = useState("all");
 
   const currentCountry = useMemo(
-    () => mockCountries.find((c) => c.slug === countrySlug),
+    () => mockCountries.find((c: Country) => c.slug === countrySlug),
     [countrySlug]
   );
 
   const provincesInCountry = useMemo(() => {
     if (!currentCountry) return [];
-    return mockProvinces.filter((p) => p.countryId === currentCountry._id);
+    return mockProvinces.filter(
+      (p: Province) => p.countryId === currentCountry._id
+    );
   }, [currentCountry]);
 
   const filteredDestinations = useMemo(() => {
     if (!currentCountry) return [];
     return mockDestinations.filter(
-      (d) =>
+      (d: Destination) =>
         d.countryId === currentCountry._id &&
         (selectedProvince === "all" || d.provinceId === selectedProvince)
     );
@@ -80,7 +83,7 @@ export default function CountryDestinationsPage() {
                 <option value="all" className="bg-gray-800">
                   Semua Provinsi
                 </option>
-                {provincesInCountry.map((province) => (
+                {provincesInCountry.map((province: Province) => (
                   <option
                     key={province._id}
                     value={province._id}
@@ -96,7 +99,7 @@ export default function CountryDestinationsPage() {
           {/* Destinations grid */}
           {filteredDestinations.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {filteredDestinations.map((destination) => (
+              {filteredDestinations.map((destination: Destination) => (
                 <DestinationCard
                   key={destination._id}
                   destination={destination}

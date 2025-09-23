@@ -1,4 +1,4 @@
-// src/app/destinations/[countryId]/[provinceId]/[destinationId]/page.tsx
+// src/app/destinations/[countryId]/[provinceId]/[destinationId]/page.tsx (Diperbaiki)
 "use client";
 
 import { useParams } from "next/navigation";
@@ -16,7 +16,7 @@ export default function DestinationDetailPage() {
   const destinationSlug = params.destinationId as string;
 
   const destination: Destination | undefined = mockDestinations.find(
-    (d) => d.slug === destinationSlug
+    (d: Destination) => d.slug === destinationSlug
   );
 
   if (!destination) {
@@ -29,6 +29,7 @@ export default function DestinationDetailPage() {
     );
   }
 
+  // ... (sisa kode sama)
   return (
     <main className="min-h-screen relative">
       {/* Full page background image */}

@@ -14,7 +14,6 @@ export interface Province {
   countryId: string;
 }
 
-// Tipe Post ditambahkan kembali untuk memperbaiki error di page.tsx
 export interface Post {
   _id: string;
   title: string;
@@ -54,4 +53,23 @@ export interface Destination {
   timeline: TimelineItem[];
   highlights: string[];
   createdAt: string;
+}
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  avatar: string;
+  rating: number;
+  destination: string;
+  comment: string;
+  date: string;
+}
+
+export interface JournalEntry {
+  id: string;
+  title: string;
+  date: string;
+  category: string;
+  imageUrl: string;
+  excerpt: string;
 }
