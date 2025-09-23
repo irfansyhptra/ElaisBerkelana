@@ -1,39 +1,39 @@
-// src/app/page.tsx (Diperbaiki)
+// src/app/page.tsx (Enhanced with Glassmorphism)
 "use client";
 
 import HeroSection from "@/components/HeroSection";
-// TravelPost dan MOCK_POSTS tidak lagi digunakan, jadi kita hapus.
 import { Testimonial, JournalEntry } from "@/types";
 import AboutSection from "@/components/AboutSection";
 import TestimonialCard from "@/components/TestimonialCard";
 import { testimonials } from "@/data/testimonials";
 import JournalCard from "@/components/JournalCard";
 import { mockJournalEntries } from "@/data/journal";
+import ImpactSection from "@/components/ImpactSection";
 import Link from "next/link";
-
-// MOCK_POSTS dihapus karena tidak digunakan.
 
 export default function Home() {
   return (
-    <div className="bg-white">
+    <div className="relative">
       <section className="min-h-screen relative">
         <HeroSection />
       </section>
 
-      {/* Bagian Jurnal Terbaru */}
-      <section id="journal" className="section-minimal bg-gray-50">
-        <div className="w-full px-8 lg:px-16 xl:px-20">
+      {/* Enhanced Journal Section with Glass Effect */}
+      <section id="journal" className="section-minimal relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-white/30 to-orange-50/50"></div>
+        <div className="relative z-10 w-full px-8 lg:px-16 xl:px-20">
           <div className="text-center mb-16">
-            <div className="glass-card-minimal max-w-4xl mx-auto">
+            <div className="glass-card-liquid max-w-4xl mx-auto">
               <h2 className="title-large text-gray-900 mb-4" data-aos="fade-up">
-                Jurnal & Kegiatan Terbaru
+                Dokumentasi Terbaru
               </h2>
               <p
                 className="text-xl text-gray-600 font-light"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Dokumentasi dari berbagai proyek dan kegiatan yang saya lakukan.
+                Catatan perjalanan terbaru dalam mendokumentasikan dampak positif 
+                industri kelapa sawit di berbagai wilayah Indonesia.
               </p>
             </div>
           </div>
@@ -45,33 +45,38 @@ export default function Home() {
                   key={entry.id}
                   data-aos="fade-up"
                   data-aos-delay={100 * index}
+                  className="glass-card-liquid hover:scale-105 transition-transform duration-500"
                 >
                   <JournalCard entry={entry} />
                 </div>
               ))}
           </div>
           <div className="text-center mt-12" data-aos="fade-up">
-            <Link href="/journal" className="btn-primary">
-              Lihat Semua Jurnal
-            </Link>
+            <div className="glass-card-minimal inline-block">
+              <Link href="/journal" className="btn-primary">
+                Lihat Semua Dokumentasi
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Bagian Testimoni */}
-      <section className="section-minimal bg-white">
-        <div className="w-full px-8 lg:px-16 xl:px-20">
+      {/* Enhanced Testimonial Section with Glass Effect */}
+      <section className="section-minimal relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white/20 to-green-50/40"></div>
+        <div className="relative z-10 w-full px-8 lg:px-16 xl:px-20">
           <div className="text-center mb-16">
-            <div className="glass-card-minimal max-w-4xl mx-auto">
+            <div className="glass-card-liquid max-w-4xl mx-auto">
               <h2 className="title-large text-gray-900 mb-4" data-aos="fade-up">
-                Apa Kata Mereka
+                Suara Dari Lapangan
               </h2>
               <p
                 className="text-xl text-gray-600 font-light"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Beberapa testimoni dari rekan dan kolaborator.
+                Testimoni langsung dari petani, kepala desa, dan stakeholder 
+                industri kelapa sawit yang telah merasakan dampak positifnya.
               </p>
             </div>
           </div>
@@ -81,6 +86,7 @@ export default function Home() {
                 key={testimonial.id}
                 data-aos="fade-up"
                 data-aos-delay={100 * index}
+                className="glass-card-liquid hover:scale-105 transition-transform duration-500"
               >
                 <TestimonialCard testimonial={testimonial} />
               </div>
@@ -89,8 +95,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="min-h-screen">
-        <AboutSection />
+      {/* Impact Section */}
+      <section className="relative">
+        <ImpactSection />
+      </section>
+
+      <section className="min-h-screen relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50/40 via-white/30 to-green-50/50"></div>
+        <div className="relative z-10">
+          <AboutSection />
+        </div>
       </section>
     </div>
   );
