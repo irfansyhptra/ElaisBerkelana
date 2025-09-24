@@ -82,8 +82,8 @@ export default function HeroSection() {
         </div>
 
         {/* Subtitle with glass background */}
-        <div className="glass-card-minimal mb-8 max-w-4xl mx-auto">
-          <p className="text-xl md:text-2xl text-gray-700 leading-relaxed">
+        <div className="mb-8 max-w-4xl mx-auto">
+          <p className="text-xl md:text-2xl text-white-700 leading-relaxed">
             Dokumentasi perjalanan sosial mengeksplorasi dampak positif industri 
             kelapa sawit terhadap pemberdayaan masyarakat dan pembangunan berkelanjutan 
             di berbagai desa Indonesia.
