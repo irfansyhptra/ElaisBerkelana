@@ -1,122 +1,114 @@
 // src/data/destinations.ts
-import { Destination } from "@/types";
+import { Destination, Country, Province } from "@/types";
+
+// Mock countries data
+const mockCountries: Country[] = [
+  {
+    _id: "1",
+    name: "Indonesia",
+    slug: "indonesia",
+    image: {
+      url: "/images/destinations/indo.jpg",
+      publicId: "indo",
+    },
+  },
+];
+
+// Mock provinces data
+const mockProvinces: Province[] = [
+  {
+    _id: "1",
+    name: "Aceh",
+    slug: "aceh",
+    country: "1",
+  },
+  {
+    _id: "2",
+    name: "Jawa Barat",
+    slug: "jawa-barat",
+    country: "1",
+  },
+];
 
 export const mockDestinations: Destination[] = [
   {
     _id: "1",
-    slug: "desa-sungai-bahar",
-    countryId: "1",
-    provinceId: "101",
-    village: "Desa Sungai Bahar",
-    province: "Sumatera Selatan",
-    country: "Indonesia",
-    description: "Desa yang mengalami transformasi ekonomi signifikan melalui program kemitraan kelapa sawit berkelanjutan...",
+    title: "Desa Gayo Highlands",
+    slug: "gayo-highlands",
+    description:
+      "Desa wisata di dataran tinggi Gayo dengan keindahan alam pegunungan dan budaya kopi yang khas.",
+    country: mockCountries[0],
+    province: mockProvinces[0],
+    village: "Desa Gayo Highlands",
+    images: ["/images/destinations/gayo.jpg", "/images/destinations/indo.jpg"],
+    price: 500000,
+    rating: 4.8,
+    duration: "2-3 hari",
+    included: [
+      "Akomodasi homestay",
+      "Makan 3x sehari",
+      "Tour guide lokal",
+      "Aktivitas wisata kopi",
+      "Transportasi lokal",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        activities: [
+          "Arrival dan check-in homestay",
+          "Tour perkebunan kopi",
+          "Proses pengolahan kopi tradisional",
+          "Menikmati sunset di bukit",
+        ],
+      },
+      {
+        day: 2,
+        activities: [
+          "Trekking ke air terjun",
+          "Wisata Danau Laut Tawar",
+          "Interaksi dengan masyarakat lokal",
+          "Belajar tarian tradisional Gayo",
+        ],
+      },
+    ],
+    featured: true,
+    createdAt: "2024-01-15",
     youtubeUrl: "https://www.youtube.com/watch?v=example1",
-    instagramUrl: "https://www.instagram.com/p/C2x-...",
-    coverImage: "/images/destinations/gayo.jpg",
-    imageGallery: [
-      { url: "/images/destinations/gayo.jpg", caption: "Perkebunan Kelapa Sawit" },
-      { url: "/images/destinations/indo.jpg", caption: "Fasilitas Pengolahan" },
-    ],
-    timeline: [
-      {
-        time: "07:00",
-        activity: "Kunjungan ke Kebun Kelapa Sawit",
-        notes: "Melihat proses panen tandan buah segar (TBS) bersama petani plasma.",
-        imageUrl: "/images/destinations/gayo.jpg",
-      },
-      {
-        time: "10:00",
-        activity: "Diskusi dengan Koperasi Petani",
-        notes: "Membahas dampak ekonomi dan sosial dari program kemitraan.",
-        imageUrl: "/images/destinations/indo.jpg",
-      },
-      {
-        time: "14:00",
-        activity: "Mengunjungi Fasilitas Pendidikan",
-        notes: "Melihat sekolah dan beasiswa yang didanai CSR perusahaan sawit.",
-        imageUrl: "/images/destinations/gayo.jpg",
-      },
-    ],
-    highlights: ["Pemberdayaan Ekonomi", "Program CSR", "Koperasi Petani", "Teknologi Berkelanjutan"],
-    createdAt: "2025-11-15",
   },
   {
     _id: "2",
-    slug: "muaro-jambi",
-    countryId: "1",
-    provinceId: "102",
-    village: "Desa Muaro Jambi",
-    province: "Jambi",
-    country: "Indonesia",
-    description: "Pusat inovasi pengolahan kelapa sawit menjadi produk turunan ramah lingkungan...",
+    title: "Desa Wisata Indonesia",
+    slug: "wisata-indonesia",
+    description:
+      "Desa wisata yang menampilkan keragaman budaya Indonesia dengan berbagai atraksi wisata tradisional.",
+    country: mockCountries[0],
+    province: mockProvinces[1],
+    village: "Desa Wisata Indonesia",
+    images: ["/images/destinations/indo.jpg", "/images/destinations/gayo.jpg"],
+    price: 300000,
+    rating: 4.5,
+    duration: "1-2 hari",
+    included: [
+      "Akomodasi guesthouse",
+      "Makan tradisional",
+      "Workshop kerajinan",
+      "Pertunjukan seni budaya",
+      "Souvenir khas daerah",
+    ],
+    itinerary: [
+      {
+        day: 1,
+        activities: [
+          "Welcome ceremony",
+          "Tour desa dan pengenalan budaya",
+          "Workshop membatik",
+          "Pertunjukan tari tradisional",
+          "Makan malam bersama keluarga host",
+        ],
+      },
+    ],
+    featured: false,
+    createdAt: "2024-02-01",
     youtubeUrl: "https://www.youtube.com/watch?v=example2",
-    instagramUrl: "https://www.instagram.com/p/D3y-...",
-    coverImage: "/images/destinations/indo.jpg",
-    imageGallery: [
-      { url: "/images/destinations/indo.jpg", caption: "Pabrik Pengolahan" },
-      { url: "/images/destinations/gayo.jpg", caption: "Komunitas Petani" },
-    ],
-    timeline: [
-      {
-        time: "08:00",
-        activity: "Tour Pabrik Kelapa Sawit",
-        notes: "Menyaksikan proses pengolahan TBS menjadi minyak sawit mentah (CPO).",
-        imageUrl: "/images/destinations/indo.jpg",
-      },
-      {
-        time: "11:00",
-        activity: "Workshop Teknologi Hijau",
-        notes: "Belajar tentang pengolahan limbah sawit menjadi biogas dan kompos.",
-        imageUrl: "/images/destinations/gayo.jpg",
-      },
-      {
-        time: "15:00",
-        activity: "Dialog dengan Masyarakat",
-        notes: "Diskusi dampak positif industri sawit terhadap kesejahteraan lokal.",
-        imageUrl: "/images/destinations/indo.jpg",
-      },
-    ],
-    highlights: ["Teknologi Ramah Lingkungan", "Pengolahan Limbah", "Pemberdayaan Masyarakat"],
-    createdAt: "2025-10-28",
-  },
-  {
-    _id: "3",
-    slug: "sawit-jaya-kalbar",
-    countryId: "1",
-    provinceId: "103",
-    village: "Desa Sawit Jaya",
-    province: "Kalimantan Barat",
-    country: "Indonesia",
-    description: "Desa percontohan pemberdayaan perempuan dalam industri kelapa sawit berkelanjutan...",
-    youtubeUrl: "https://www.youtube.com/watch?v=example3",
-    instagramUrl: "https://www.instagram.com/p/E4z-...",
-    coverImage: "/images/destinations/gayo.jpg",
-    imageGallery: [
-      { url: "/images/destinations/gayo.jpg", caption: "Koperasi Wanita Tani" },
-      { url: "/images/destinations/indo.jpg", caption: "Pusat Pembibitan" },
-    ],
-    timeline: [
-      {
-        time: "09:00",
-        activity: "Kunjungan Koperasi Wanita Tani",
-        notes: "Melihat peran perempuan dalam manajemen perkebunan kelapa sawit.",
-        imageUrl: "/images/destinations/gayo.jpg",
-      },
-      {
-        time: "13:00",
-        activity: "Program Pembibitan Berkelanjutan",
-        notes: "Dokumentasi nursery dan teknik pembibitan ramah lingkungan.",
-        imageUrl: "/images/destinations/indo.jpg",
-      },
-      {
-        time: "16:00",
-        activity: "Evaluasi Program CSR",
-        notes: "Review dampak program kesehatan dan pendidikan dari perusahaan mitra.",
-        imageUrl: "/images/destinations/gayo.jpg",
-      },
-    ],
-    highlights: ["Pemberdayaan Perempuan", "Nursery Berkelanjutan", "Program Kesehatan"],
-    createdAt: "2025-09-12",
   },
 ];

@@ -1,72 +1,55 @@
-export interface Testimonial {
-  id: string;
-  name: string;
-  avatar: string;
-  rating: number;
-  destination: string;
-  comment: string;
-  date: string;
-}
+// src/data/testimonials.ts
+import { Testimonial } from "@/types";
 
 export const testimonials: Testimonial[] = [
   {
     id: "1",
-    name: "Pak Suryadi",
-    avatar: "/images/testimonials/avatar1.jpg",
+    name: "Sarah Johnson",
+    avatar: "/images/team/avatar1.jpg", // Using placeholder path
     rating: 5,
-    destination: "Petani Kelapa Sawit, Desa Muaro Jambi",
+    destination: "Gayo Highlands",
     comment:
-      "Berkat kemitraan dengan perusahaan kelapa sawit, kehidupan keluarga saya jauh lebih baik. Anak-anak bisa sekolah dan kami punya rumah yang layak.",
-    date: "2025-10-15",
+      "Pengalaman yang luar biasa! Masyarakat lokal sangat ramah dan pemandangan alamnya memukau. Kopi Gayo benar-benar yang terbaik yang pernah saya coba.",
+    date: "2024-01-20",
   },
   {
     id: "2",
-    name: "Ibu Sari Wulandari",
-    avatar: "/images/testimonials/avatar2.jpg",
+    name: "Ahmad Rizki",
+    avatar: "/images/team/avatar2.jpg", // Using placeholder path
     rating: 5,
-    destination: "Ketua Koperasi Wanita Tani Sawit, Riau",
+    destination: "Desa Wisata Indonesia",
     comment:
-      "Melalui koperasi ini, kami para ibu-ibu bisa mandiri secara ekonomi. Penghasilan dari kelapa sawit membantu pendidikan anak-anak kami.",
-    date: "2025-09-28",
+      "Program yang sangat edukatif dan menyenangkan. Saya belajar banyak tentang budaya Indonesia dan mendapat pengalaman yang tak terlupakan bersama keluarga host.",
+    date: "2024-02-05",
   },
   {
     id: "3",
-    name: "Dr. Bambang Sutrisno",
-    avatar: "/images/testimonials/avatar3.jpg",
-    rating: 5,
-    destination: "Kepala Desa Sungai Bahar, Sumsel",
+    name: "Maya Chen",
+    avatar: "/images/team/avatar3.jpg", // Using placeholder path
+    rating: 4,
+    destination: "Gayo Highlands",
     comment:
-      "Industri kelapa sawit telah mengubah wajah desa kami. Infrastruktur membaik, ada klinik kesehatan, dan generasi muda tidak lagi merantau.",
-    date: "2025-10-02",
+      "Tour yang well-organized dengan guide yang sangat knowledgeable. Homestay nya bersih dan nyaman. Highly recommended untuk yang ingin merasakan authentic experience.",
+    date: "2024-02-12",
   },
   {
     id: "4",
-    name: "Ahmad Rizaldi",
-    avatar: "/images/testimonials/avatar1.jpg",
+    name: "Budi Santoso",
+    avatar: "/images/team/avatar4.jpg", // Using placeholder path
     rating: 5,
-    destination: "Manajer CSR PT. Sawit Makmur",
+    destination: "Desa Wisata Indonesia",
     comment:
-      "Program pemberdayaan masyarakat melalui kelapa sawit berkelanjutan telah memberikan dampak nyata pada peningkatan taraf hidup petani.",
-    date: "2025-09-15",
+      "Sebagai orang Indonesia, saya tetap kagum dengan keberagaman budaya yang ditampilkan di sini. Perfect untuk family trip dan edukasi anak-anak tentang budaya sendiri.",
+    date: "2024-02-18",
   },
   {
     id: "5",
-    name: "Ibu Nurlaela",
-    avatar: "/images/testimonials/avatar2.jpg",
+    name: "Lisa Anderson",
+    avatar: "/images/team/avatar5.jpg", // Using placeholder path
     rating: 5,
-    destination: "Guru SD Desa Sawit Jaya, Kalbar",
+    destination: "Gayo Highlands",
     comment:
-      "Bantuan pendidikan dari perusahaan sawit memungkinkan kami memiliki perpustakaan dan laboratorium komputer untuk anak-anak desa.",
-    date: "2025-08-20",
-  },
-  {
-    id: "6",
-    name: "Bapak Joko Widodo",
-    avatar: "/images/testimonials/avatar3.jpg",
-    rating: 5,
-    destination: "Koordinator Plasma Sawit, Kalteng",
-    comment:
-      "Sistem plasma kelapa sawit memberikan kepastian penghasilan bagi petani kecil. Ini solusi yang berkelanjutan untuk ekonomi pedesaan.",
-    date: "2025-08-10",
+      "The community-based tourism approach here is amazing. You can really feel how tourism is benefiting the local community. The coffee plantation tour was my favorite!",
+    date: "2024-03-02",
   },
 ];

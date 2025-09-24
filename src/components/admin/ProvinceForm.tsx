@@ -1,16 +1,33 @@
 // src/components/admin/ProvinceForm.tsx
 "use client";
 
-import { useState } from "react";
-import { Province } from "@/types";
-import { mockCountries } from "@/data/countries"; // Untuk dropdown
+import { useState, useEffect } from "react";
+import { Country, Province } from "@/types";
+import { getCountries, createProvince } from "@/lib/api";
 
 const ProvinceForm = () => {
-  const [formData, setFormData] = useState<Partial<Province>>({
-    name: "",
-    slug: "",
-    countryId: "",
-  });
+  const [formData, setFormData] = useState<{ name: string; countryId: string }>(
+    {
+      name: "",
+      countryId: "",
+    }
+  );
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const countryData = await getCountries();
+        setCountries(countryData);
+      } catch (err) {
+        setError("Gagal memuat data negara.");
+      }
+    };
+    fetchCountries();
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -19,16 +36,33 @@ const ProvinceForm = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-      ...(name === "name" && {
-        slug: value.toLowerCase().replace(/\s+/g, "-"),
-      }),
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Saving Province:", formData);
-    alert("Data provinsi (simulasi) berhasil disimpan. Cek console log.");
+    if (!formData.name || !formData.countryId) {
+      setError("Nama provinsi dan negara harus diisi.");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      const newProvinceData: Partial<Province> = {
+        name: formData.name,
+        country: formData.countryId,
+      };
+      await createProvince(newProvinceData);
+      setSuccess("Provinsi berhasil ditambahkan!");
+      setFormData({ name: "", countryId: "" }); // Reset form
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Terjadi kesalahan.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -37,6 +71,12 @@ const ProvinceForm = () => {
       className="bg-white p-8 rounded-xl shadow-lg space-y-6"
     >
       <h2 className="text-2xl font-bold text-gray-800">Kelola Data Provinsi</h2>
+      {error && (
+        <div className="bg-red-100 text-red-700 p-3 rounded">{error}</div>
+      )}
+      {success && (
+        <div className="bg-green-100 text-green-700 p-3 rounded">{success}</div>
+      )}
       <div>
         <label
           htmlFor="countryId"
@@ -50,12 +90,12 @@ const ProvinceForm = () => {
           value={formData.countryId}
           onChange={handleChange}
           required
-          className="w-full p-3 border rounded-md bg-white focus:ring-2 focus:ring-brand-green"
+          className="w-full p-3 border rounded-md bg-white focus:ring-2 focus:ring-green-500"
         >
           <option value="" disabled>
             -- Pilih Negara --
           </option>
-          {mockCountries.map((country) => (
+          {countries.map((country) => (
             <option key={country._id} value={country._id}>
               {country.name}
             </option>
@@ -77,14 +117,15 @@ const ProvinceForm = () => {
           onChange={handleChange}
           placeholder="Contoh: Aceh"
           required
-          className="w-full p-3 border rounded-md focus:ring-2 focus:ring-brand-green"
+          className="w-full p-3 border rounded-md focus:ring-2 focus:ring-green-500"
         />
       </div>
       <button
         type="submit"
-        className="w-full bg-brand-green text-white font-bold py-3 rounded-md hover:bg-opacity-90 transition-colors"
+        disabled={loading}
+        className="w-full bg-green-600 text-white font-bold py-3 rounded-md hover:bg-green-700 transition-colors disabled:bg-gray-400"
       >
-        Simpan Provinsi
+        {loading ? "Menyimpan..." : "Simpan Provinsi"}
       </button>
     </form>
   );

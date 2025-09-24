@@ -3,22 +3,33 @@ import { Province } from "@/types";
 
 export const mockProvinces: Province[] = [
   {
-    _id: "101",
+    _id: "1",
     name: "Aceh",
     slug: "aceh",
-    countryId: "1",
+    country: "1", // Indonesia
   },
   {
-    _id: "102",
-    name: "Bali",
-    slug: "bali",
-    countryId: "1",
+    _id: "2",
+    name: "Jawa Barat",
+    slug: "jawa-barat",
+    country: "1", // Indonesia
   },
   {
-    _id: "201",
-    name: "Kyoto",
-    slug: "kyoto",
-    countryId: "2",
+    _id: "3",
+    name: "Jawa Tengah",
+    slug: "jawa-tengah",
+    country: "1", // Indonesia
   },
-  // Tambahkan provinsi lainnya di sini
+  {
+    _id: "4",
+    name: "Tokyo",
+    slug: "tokyo",
+    country: "2", // Jepang
+  },
+  {
+    _id: "5",
+    name: "Osaka",
+    slug: "osaka",
+    country: "2", // Jepang
+  },
 ];

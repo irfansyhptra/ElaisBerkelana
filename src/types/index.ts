@@ -1,58 +1,42 @@
-// src/types/index.ts
-
 export interface Country {
   _id: string;
   name: string;
   slug: string;
-  imageUrl: string;
+  image: {
+    url: string;
+    publicId: string;
+  };
 }
 
 export interface Province {
   _id: string;
   name: string;
   slug: string;
-  countryId: string;
+  country: string; // ObjectId as string
 }
 
-export interface Post {
-  _id: string;
-  title: string;
-  village: string;
-  date: string;
-  description: string;
-  youtubeUrl: string;
-  imageUrl: string;
-}
-
-export interface ImageGallery {
-  url: string;
-  caption: string;
-}
-
-export interface TimelineItem {
-  time: string;
-  activity: string;
-  notes: string;
-  imageUrl?: string;
+export interface Itinerary {
+  day: number;
+  activities: string[];
 }
 
 export interface Destination {
   _id: string;
+  title: string;
   slug: string;
-  countryId: string;
-  provinceId: string;
-  village: string;
-  province: string;
-  country: string;
   description: string;
-  youtubeUrl?: string;
-  instagramUrl?: string;
-  tiktokUrl?: string;
-  coverImage: string;
-  imageGallery: ImageGallery[];
-  timeline: TimelineItem[];
-  highlights: string[];
+  country: Country;
+  province: Province;
+  village: string;
+  images: string[];
+  price: number;
+  rating: number;
+  duration: string;
+  included: string[];
+  itinerary: Itinerary[];
+  featured: boolean;
   createdAt: string;
+  youtubeUrl?: string; // Add this if you plan to use it
 }
 
 export interface Testimonial {

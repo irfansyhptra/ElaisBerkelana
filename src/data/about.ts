@@ -1,88 +1,76 @@
-export interface AboutData {
-  title: string;
-  description: string;
-  vision: string;
-  mission: string[];
-  stats: {
-    label: string;
-    value: string;
-  }[];
-  team: TeamMember[];
-}
+// src/data/about.ts
 
-export interface TeamMember {
-  id: string;
-  name: string;
-  position: string;
-  photo: string;
-  social: {
-    instagram?: string;
-    linkedin?: string;
-    twitter?: string;
-  };
-}
-
-export const aboutData: AboutData = {
-  title: "Elaeis Berkelana",
-  description:
-    "Elaeis Berkelana adalah platform dokumentasi sosial yang berfokus pada perjalanan eksplorasi manfaat kelapa sawit di berbagai desa dan perusahaan di Indonesia. Kami mendokumentasikan dampak positif industri kelapa sawit terhadap pemberdayaan masyarakat lokal dan pembangunan ekonomi berkelanjutan.",
+export const aboutData = {
+  mission:
+    "Membangun jembatan antara traveler dan masyarakat lokal melalui pariwisata berkelanjutan yang memberikan dampak positif bagi semua pihak.",
   vision:
-    "Menjadi platform dokumentasi terpercaya yang menyajikan narasi autentik tentang kontribusi positif industri kelapa sawit terhadap pembangunan sosial-ekonomi Indonesia.",
-  mission: [
-    "Mendokumentasikan dampak positif industri kelapa sawit terhadap kehidupan masyarakat desa",
-    "Menyajikan cerita autentik tentang pemberdayaan ekonomi lokal melalui perkebunan kelapa sawit",
-    "Membangun kesadaran tentang praktik berkelanjutan dalam industri kelapa sawit",
-    "Menghubungkan cerita lokal dengan narasi global tentang pembangunan berkelanjutan",
+    "Menjadi platform terdepan dalam mengembangkan community-based tourism di Asia Tenggara yang berkelanjutan dan bertanggung jawab.",
+  values: [
+    {
+      title: "Sustainability",
+      description:
+        "Mengutamakan kelestarian lingkungan dan keberlanjutan ekonomi masyarakat lokal",
+      icon: "🌱",
+    },
+    {
+      title: "Authenticity",
+      description:
+        "Memberikan pengalaman autentik dengan menghormati budaya dan tradisi setempat",
+      icon: "🏛️",
+    },
+    {
+      title: "Community Impact",
+      description:
+        "Memastikan pariwisata memberikan manfaat langsung kepada masyarakat lokal",
+      icon: "🤝",
+    },
+    {
+      title: "Responsible Travel",
+      description:
+        "Mendorong praktik perjalanan yang bertanggung jawab dan edukatif",
+      icon: "✈️",
+    },
   ],
   stats: [
     {
-      label: "Desa Dikunjungi",
-      value: "45+",
+      number: "50+",
+      label: "Desa Mitra",
+      description: "Desa wisata yang telah bergabung dengan program kami",
     },
     {
-      label: "Keluarga Terdampak",
-      value: "2500+",
+      number: "1000+",
+      label: "Traveler",
+      description: "Wisatawan yang telah merasakan pengalaman berkesan",
     },
     {
-      label: "Tahun Perjalanan",
-      value: "3+",
+      number: "15+",
+      label: "Provinsi",
+      description: "Wilayah di Indonesia yang telah kami jangkau",
     },
     {
-      label: "Perusahaan Mitra",
-      value: "12+",
+      number: "95%",
+      label: "Satisfaction Rate",
+      description: "Tingkat kepuasan traveler dengan layanan kami",
     },
   ],
   team: [
     {
-      id: "1",
-      name: "Elais Rahman",
-      position: "Dokumenter & Peneliti Utama",
-      photo: "/images/team/elais.jpg",
-      social: {
-        instagram: "elaisberkelana",
-        linkedin: "elais-rahman",
-        twitter: "elaisberkelana",
-      },
+      name: "Irfan Syahputra",
+      role: "Founder & CEO",
+      description: "Travel enthusiast dengan passion untuk sustainable tourism",
+      image: "/images/team/founder.jpg",
     },
     {
-      id: "2",
-      name: "Dr. Sari Dewi",
-      position: "Advisor Sosial-Ekonomi",
-      photo: "/images/team/sari.jpg",
-      social: {
-        instagram: "saridewi_phd",
-        linkedin: "sari-dewi-phd",
-      },
+      name: "Sarah Indira",
+      role: "Community Relations Manager",
+      description: "Expert dalam membangun hubungan dengan masyarakat lokal",
+      image: "/images/team/sarah.jpg",
     },
     {
-      id: "3",
-      name: "Budi Pranoto",
-      position: "Koordinator Lapangan",
-      photo: "/images/team/budi.jpg",
-      social: {
-        instagram: "budipranoto",
-        twitter: "budipranoto",
-      },
+      name: "Ahmad Fauzi",
+      role: "Tour Experience Designer",
+      description: "Spesialis dalam merancang pengalaman wisata yang berkesan",
+      image: "/images/team/ahmad.jpg",
     },
   ],
 };

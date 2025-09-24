@@ -1,40 +1,66 @@
-// src/app/destinations/[countryId]/page.tsx (Diperbaiki)
+// src/app/destinations/[countryId]/page.tsx
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams } from "next/navigation";
-import { mockProvinces } from "@/data/provinces";
-import { mockDestinations } from "@/data/destinations";
-import { mockCountries } from "@/data/countries";
+import { getProvincesByCountry, getDestinations } from "@/lib/api";
 import DestinationCard from "@/components/DestinationCard";
 import Image from "next/image";
-import { Country, Province, Destination } from "@/types"; // Impor tipe
+import { Province, Destination, Country } from "@/types";
+import { getCountries } from "@/lib/api";
 
 export default function CountryDestinationsPage() {
   const params = useParams();
   const countrySlug = params.countryId as string;
+
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [destinations, setDestinations] = useState<Destination[]>([]);
   const [selectedProvince, setSelectedProvince] = useState("all");
+  const [loading, setLoading] = useState(true);
 
   const currentCountry = useMemo(
-    () => mockCountries.find((c: Country) => c.slug === countrySlug),
-    [countrySlug]
+    () => countries.find((c) => c.slug === countrySlug),
+    [countries, countrySlug]
   );
 
-  const provincesInCountry = useMemo(() => {
-    if (!currentCountry) return [];
-    return mockProvinces.filter(
-      (p: Province) => p.countryId === currentCountry._id
-    );
-  }, [currentCountry]);
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const countryData = await getCountries();
+        setCountries(countryData);
+        const country = countryData.find((c) => c.slug === countrySlug);
+
+        if (country) {
+          const provinceData = await getProvincesByCountry(country._id);
+          setProvinces(provinceData);
+          const destinationData = await getDestinations({
+            provinceSlug: "all",
+          }); // Load all for the country initially
+          setDestinations(destinationData);
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, [countrySlug]);
 
   const filteredDestinations = useMemo(() => {
-    if (!currentCountry) return [];
-    return mockDestinations.filter(
-      (d: Destination) =>
-        d.countryId === currentCountry._id &&
-        (selectedProvince === "all" || d.provinceId === selectedProvince)
+    if (selectedProvince === "all") return destinations;
+    return destinations.filter((d) => d.province.slug === selectedProvince);
+  }, [destinations, selectedProvince]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
     );
-  }, [currentCountry, selectedProvince]);
+  }
 
   if (!currentCountry) {
     return (
@@ -48,7 +74,6 @@ export default function CountryDestinationsPage() {
 
   return (
     <div className="min-h-screen relative">
-      {/* Full page background image */}
       <div className="fixed inset-0 z-0">
         <Image
           src="/hero-background.png"
@@ -60,10 +85,8 @@ export default function CountryDestinationsPage() {
         <div className="absolute inset-0 bg-black/35" />
       </div>
 
-      {/* Content with glassmorphism */}
       <div className="relative z-10 pt-32 pb-16">
         <div className="w-full px-8 lg:px-16 xl:px-20">
-          {/* Page title */}
           <div className="text-center mb-12">
             <div className="glass-card max-w-4xl mx-auto">
               <h1 className="title-large text-white">
@@ -72,7 +95,6 @@ export default function CountryDestinationsPage() {
             </div>
           </div>
 
-          {/* Province filter */}
           <div className="mb-8 flex justify-center">
             <div className="glass-card-minimal">
               <select
@@ -83,10 +105,10 @@ export default function CountryDestinationsPage() {
                 <option value="all" className="bg-gray-800">
                   Semua Provinsi
                 </option>
-                {provincesInCountry.map((province: Province) => (
+                {provinces.map((province: Province) => (
                   <option
                     key={province._id}
-                    value={province._id}
+                    value={province.slug}
                     className="bg-gray-800"
                   >
                     {province.name}
@@ -96,7 +118,6 @@ export default function CountryDestinationsPage() {
             </div>
           </div>
 
-          {/* Destinations grid */}
           {filteredDestinations.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {filteredDestinations.map((destination: Destination) => (

@@ -1,14 +1,39 @@
-// src/app/destinations/page.tsx (Diperbaiki)
+// src/app/destinations/page.tsx
 "use client";
 import CountryCard from "@/components/CountryCard";
-import { mockCountries } from "@/data/countries";
+import { useEffect, useState } from "react";
+import { Country } from "@/types";
+import { getCountries } from "@/lib/api";
 import Image from "next/image";
-import { Country } from "@/types"; // Impor tipe
 
 export default function DestinationsPage() {
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await getCountries();
+        setCountries(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen relative">
-      {/* Full page background image */}
       <div className="fixed inset-0 z-0">
         <Image
           src="/hero-background.png"
@@ -19,11 +44,8 @@ export default function DestinationsPage() {
         />
         <div className="absolute inset-0 bg-black/30" />
       </div>
-
-      {/* Content with glassmorphism */}
       <div className="relative z-10 pt-32 pb-16">
         <div className="w-full px-8 lg:px-16 xl:px-20">
-          {/* Page title */}
           <div className="text-center mb-16">
             <div className="glass-card max-w-4xl mx-auto">
               <h1 className="title-large text-white mb-4">
@@ -34,10 +56,8 @@ export default function DestinationsPage() {
               </p>
             </div>
           </div>
-
-          {/* Countries grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {mockCountries.map((country: Country) => (
+            {countries.map((country: Country) => (
               <CountryCard key={country._id} country={country} />
             ))}
           </div>

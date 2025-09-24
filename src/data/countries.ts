@@ -6,12 +6,18 @@ export const mockCountries: Country[] = [
     _id: "1",
     name: "Indonesia",
     slug: "indonesia",
-    imageUrl: "../images/destinations/indo.jpg",
+    image: {
+      url: "/images/destinations/indo.jpg",
+      publicId: "indo",
+    },
   },
   {
     _id: "2",
     name: "Jepang",
     slug: "jepang",
-    imageUrl: "/images/destinations/gayo.jpg",
+    image: {
+      url: "/images/destinations/gayo.jpg", // Using available image
+      publicId: "gayo",
+    },
   },
 ];

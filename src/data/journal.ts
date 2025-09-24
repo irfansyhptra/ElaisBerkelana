@@ -4,56 +4,38 @@ import { JournalEntry } from "@/types";
 export const mockJournalEntries: JournalEntry[] = [
   {
     id: "1",
-    title: "Transformasi Ekonomi Desa Sungai Bahar: Dari Perkebunan Kelapa Sawit",
-    date: "15 November 2025",
-    category: "Dampak Ekonomi",
+    title: "Petualangan di Gayo Highlands",
+    date: "2024-01-15",
+    category: "Travel Experience",
     imageUrl: "/images/destinations/gayo.jpg",
     excerpt:
-      "Menyaksikan bagaimana industri kelapa sawit mengubah kehidupan ekonomi masyarakat Desa Sungai Bahar, dari yang awalnya bergantung pada pertanian subsisten menjadi ekonomi yang berkelanjutan.",
+      "Merasakan kehangatan masyarakat Gayo dan menikmati secangkir kopi arabika terbaik di dataran tinggi Aceh. Perjalanan yang tak terlupakan dengan pemandangan yang memukau.",
   },
   {
     id: "2",
-    title: "Program CSR PT. Astra Agro: Pendidikan untuk Anak Petani Sawit",
-    date: "28 Oktober 2025",
-    category: "Pendidikan & CSR",
+    title: "Keberagaman Budaya Indonesia",
+    date: "2024-02-01",
+    category: "Cultural Journey",
     imageUrl: "/images/destinations/indo.jpg",
     excerpt:
-      "Dokumentasi program beasiswa dan fasilitas pendidikan yang disediakan perusahaan kelapa sawit untuk anak-anak petani di Kalimantan Tengah.",
+      "Menjelajahi kekayaan budaya Nusantara melalui desa wisata yang menampilkan berbagai tradisi dan kerajinan lokal. Pengalaman yang memperkaya wawasan tentang Indonesia.",
   },
   {
     id: "3",
-    title: "Koperasi Kelapa Sawit Mandiri: Memberdayakan Petani Kecil",
-    date: "12 Oktober 2025",
-    category: "Pemberdayaan Petani",
-    imageUrl: "/hero-background.png",
+    title: "Sustainable Tourism di Era Modern",
+    date: "2024-02-15",
+    category: "Sustainability",
+    imageUrl: "/images/destinations/gayo.jpg",
     excerpt:
-      "Kisah inspiratif bagaimana koperasi petani kelapa sawit membantu petani kecil meningkatkan hasil panen dan kesejahteraan keluarga di Riau.",
+      "Bagaimana pariwisata berkelanjutan dapat memberikan dampak positif bagi masyarakat lokal dan lingkungan. Cerita dari lapangan tentang implementasi eco-tourism.",
   },
   {
     id: "4",
-    title: "Inovasi Pengolahan Limbah Sawit Menjadi Energi Terbarukan",
-    date: "25 September 2025",
-    category: "Teknologi Hijau",
-    imageUrl: "/images/destinations/gayo.jpg",
-    excerpt:
-      "Perjalanan ke pabrik kelapa sawit yang menerapkan teknologi pengolahan limbah menjadi biogas dan biomassa untuk kebutuhan energi desa.",
-  },
-  {
-    id: "5",
-    title: "Wanita Tani Kelapa Sawit: Peran Perempuan dalam Industri Hijau",
-    date: "8 September 2025",
-    category: "Gender & Pemberdayaan",
+    title: "Tips Traveling Responsif",
+    date: "2024-03-01",
+    category: "Travel Tips",
     imageUrl: "/images/destinations/indo.jpg",
     excerpt:
-      "Profil para wanita tani yang berperan aktif dalam industri kelapa sawit, dari pembibitan hingga manajemen koperasi.",
-  },
-  {
-    id: "6",
-    title: "Konservasi Biodiversitas di Perkebunan Kelapa Sawit Berkelanjutan",
-    date: "20 Agustus 2025",
-    category: "Lingkungan",
-    imageUrl: "/hero-background.png",
-    excerpt:
-      "Melihat upaya perusahaan kelapa sawit dalam menjaga keseimbangan ekosistem dan konservasi flora-fauna lokal di Sumatera.",
+      "Panduan praktis untuk melakukan perjalanan yang bertanggung jawab, mulai dari persiapan hingga interaksi dengan masyarakat lokal. Traveling yang memberikan manfaat untuk semua.",
   },
 ];
