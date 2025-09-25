@@ -19,7 +19,7 @@ const CountryCard = ({ country }: CountryCardProps) => {
       <Link href={`/destinations/${country.slug}`}>
         <div className="relative aspect-[5/3] rounded-2xl overflow-hidden glass-card-minimal shadow-lg group-hover:shadow-2xl transition-all duration-500">
           <OptimizedImage
-            src={normalizeImagePath(country.imageUrl)}
+            src={normalizeImagePath(country.image?.url)}
             alt={country.name}
             fill
             className="group-hover:scale-105 transition-transform duration-700"

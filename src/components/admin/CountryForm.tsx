@@ -7,6 +7,8 @@ const CountryForm = () => {
   const [name, setName] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,32 +17,26 @@ const CountryForm = () => {
       return;
     }
     setLoading(true);
+    setError(null);
+    setSuccess(null);
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("file", file);
 
     try {
-      // Try to submit to backend first
       await createCountry(formData);
-      alert("Negara berhasil ditambahkan ke backend!");
+      setSuccess("Negara berhasil ditambahkan!");
       setName("");
       setFile(null);
-    } catch (error) {
+      // Reset input file
+      const fileInput = document.getElementById("file") as HTMLInputElement;
+      if (fileInput) {
+        fileInput.value = "";
+      }
+    } catch (error: any) {
       console.error("Backend error:", error);
-
-      // Fallback: Show success with local data
-      console.log("Fallback: Saving to local mock data");
-      console.log("Country data:", {
-        name,
-        file: file?.name,
-        size: file?.size,
-      });
-
-      alert(
-        `Demo Mode: Negara "${name}" berhasil disimpan secara lokal!\n\nCatatan: Untuk produksi, pastikan backend API dan admin key sudah dikonfigurasi dengan benar.`
-      );
-      setName("");
-      setFile(null);
+      setError(error.message || "Gagal menambahkan negara. Silakan coba lagi.");
     } finally {
       setLoading(false);
     }
@@ -52,6 +48,14 @@ const CountryForm = () => {
       className="bg-white p-8 rounded-xl shadow-lg space-y-6"
     >
       <h2 className="text-2xl font-bold text-gray-800">Kelola Data Negara</h2>
+
+      {error && (
+        <div className="bg-red-100 text-red-700 p-3 rounded">{error}</div>
+      )}
+      {success && (
+        <div className="bg-green-100 text-green-700 p-3 rounded">{success}</div>
+      )}
+
       <div>
         <label
           htmlFor="name"

@@ -28,12 +28,12 @@ const HydrationSafeCard = ({
     setIsClient(true);
   }, []);
 
-  const href = `/destinations/${destination.countryId}/${destination.provinceId}/${destination.slug}`;
+  const href = `/destinations/${destination.country._id}/${destination.province._id}/${destination.slug}`;
 
   // Get dynamic styles - but only use them after hydration
-  const backgroundImage = getCountryBackgroundImage(destination.countryId);
-  const gradientOverlay = getCountryGradientOverlay(destination.countryId);
-  const accentColor = getCountryAccentColor(destination.countryId);
+  const backgroundImage = getCountryBackgroundImage(destination.country._id);
+  const gradientOverlay = getCountryGradientOverlay(destination.country._id);
+  const accentColor = getCountryAccentColor(destination.country._id);
 
   // Define stable CSS classes to prevent hydration issues
   const getGradientClass = (overlay: string) => {
@@ -115,7 +115,7 @@ const HydrationSafeCard = ({
               </h3>
 
               <p className="text-white/90 text-lg mb-4 drop-shadow-lg">
-                {destination.province}, {destination.country}
+                {destination.province.name}, {destination.country.name}
               </p>
 
               <div className="flex items-center space-x-4">
@@ -169,7 +169,9 @@ const HydrationSafeCard = ({
                 {destination.village}
               </h3>
 
-              <p className="text-white/70 text-sm">{destination.province}</p>
+              <p className="text-white/70 text-sm">
+                {destination.province.name}
+              </p>
             </div>
           </div>
         </Link>
@@ -186,7 +188,7 @@ const HydrationSafeCard = ({
           <div className="absolute inset-0">
             <OptimizedImage
               src={isClient ? backgroundImage : "/images/destinations/indo.jpg"}
-              alt={`${destination.country} Banner`}
+              alt={`${destination.country.name} Banner`}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -220,7 +222,7 @@ const HydrationSafeCard = ({
             <div className="mb-3">
               <span className="inline-flex items-center px-3 py-1 text-xs font-medium text-white/95 bg-white/20 backdrop-blur-xl rounded-full border border-white/20 shadow-lg">
                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                {destination.province}, {destination.country}
+                {destination.province.name}, {destination.country.name}
               </span>
             </div>
 

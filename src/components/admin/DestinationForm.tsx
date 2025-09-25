@@ -19,6 +19,7 @@ const initialFormData: Partial<Destination> = {
   price: 0,
   rating: 0,
   duration: "",
+  youtubeUrl: "",
   included: [],
   itinerary: [],
   featured: false,
@@ -29,7 +30,10 @@ const DestinationForm = () => {
     useState<Partial<Destination>>(initialFormData);
   const [countries, setCountries] = useState<Country[]>([]);
   const [provinces, setProvinces] = useState<Province[]>([]);
+  const [selectedCountryId, setSelectedCountryId] = useState<string>("");
+  const [selectedProvinceId, setSelectedProvinceId] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [loadingProvinces, setLoadingProvinces] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
@@ -38,28 +42,56 @@ const DestinationForm = () => {
       try {
         const countryData = await getCountries();
         setCountries(countryData);
-      } catch (err) {
-        setError("Gagal memuat data negara.");
+      } catch (error) {
+        console.error("Error loading countries:", error);
+        setError(
+          `Gagal memuat data negara: ${
+            error instanceof Error ? error.message : String(error)
+          }`
+        );
       }
     };
     fetchCountries();
   }, []);
 
   const handleCountryChange = async (countryId: string) => {
+    setSelectedCountryId(countryId);
+    setSelectedProvinceId(""); // Reset province selection
+
+    // Find country object
+    const selectedCountry = countries.find((c) => c._id === countryId);
+
     setFormData((prev) => ({
       ...prev,
-      country: countryId,
+      country: selectedCountry || undefined,
       province: undefined,
     }));
+
     setProvinces([]);
     if (countryId) {
+      setLoadingProvinces(true);
       try {
         const provinceData = await getProvincesByCountry(countryId);
         setProvinces(provinceData);
-      } catch (err) {
+      } catch (error) {
+        console.error("Error loading provinces:", error);
         setError("Gagal memuat data provinsi.");
+      } finally {
+        setLoadingProvinces(false);
       }
     }
+  };
+
+  const handleProvinceChange = (provinceId: string) => {
+    setSelectedProvinceId(provinceId);
+
+    // Find province object
+    const selectedProvince = provinces.find((p) => p._id === provinceId);
+
+    setFormData((prev) => ({
+      ...prev,
+      province: selectedProvince || undefined,
+    }));
   };
 
   const handleChange = (
@@ -69,11 +101,21 @@ const DestinationForm = () => {
   ) => {
     const { name, value, type } = e.target;
     const isCheckbox = type === "checkbox";
+    const isNumber = type === "number";
     const checkedValue = (e.target as HTMLInputElement).checked;
+
+    let processedValue: string | number | boolean = value;
+
+    if (isCheckbox) {
+      processedValue = checkedValue;
+    } else if (isNumber) {
+      // Convert to number for numeric fields
+      processedValue = value === "" ? 0 : parseFloat(value) || 0;
+    }
 
     setFormData((prev) => ({
       ...prev,
-      [name]: isCheckbox ? checkedValue : value,
+      [name]: processedValue,
     }));
   };
 
@@ -84,9 +126,37 @@ const DestinationForm = () => {
     setSuccess(null);
 
     try {
-      await createDestination(formData);
+      // Prepare data for backend - convert objects to IDs and fix data types
+      const dataToSend = {
+        ...formData,
+        country: formData.country?._id || selectedCountryId,
+        province: formData.province?._id || selectedProvinceId,
+        // Convert string values to numbers
+        price:
+          typeof formData.price === "string"
+            ? parseFloat(formData.price) || 0
+            : formData.price,
+        rating:
+          typeof formData.rating === "string"
+            ? parseFloat(formData.rating) || 0
+            : formData.rating,
+        // Ensure itinerary has at least one item
+        itinerary:
+          formData.itinerary && formData.itinerary.length > 0
+            ? formData.itinerary
+            : [{ day: 1, activities: ["Aktivitas default"] }],
+        // Ensure included is an array
+        included: formData.included || [],
+      };
+
+      console.log("Sending data:", dataToSend); // For debugging
+
+      await createDestination(dataToSend as Record<string, unknown>);
       setSuccess("Destinasi berhasil ditambahkan!");
-      setFormData(initialFormData); // Reset form
+      // Reset form
+      setFormData(initialFormData);
+      setSelectedCountryId("");
+      setSelectedProvinceId("");
       setProvinces([]);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Terjadi kesalahan.");
@@ -112,35 +182,59 @@ const DestinationForm = () => {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <select
-          name="country"
-          value={formData.country?._id || ""}
-          onChange={(e) => handleCountryChange(e.target.value)}
-          required
-          className="w-full p-3 border rounded-md bg-white"
-        >
-          <option value="">-- Pilih Negara --</option>
-          {countries.map((country) => (
-            <option key={country._id} value={country._id}>
-              {country.name}
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">
+            Negara *
+          </label>
+          <select
+            name="country"
+            value={selectedCountryId}
+            onChange={(e) => handleCountryChange(e.target.value)}
+            required
+            className="w-full p-3 border rounded-md bg-white focus:ring-2 focus:ring-green-500 focus:border-green-500"
+          >
+            <option value="">-- Pilih Negara --</option>
+            {countries.map((country) => (
+              <option key={country._id} value={country._id}>
+                {country.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-semibold mb-2">
+            Provinsi *
+          </label>
+          <select
+            name="province"
+            value={selectedProvinceId}
+            onChange={(e) => handleProvinceChange(e.target.value)}
+            required
+            disabled={!selectedCountryId || loadingProvinces}
+            className="w-full p-3 border rounded-md bg-white disabled:bg-gray-100 disabled:cursor-not-allowed focus:ring-2 focus:ring-green-500 focus:border-green-500"
+          >
+            <option value="">
+              {!selectedCountryId
+                ? "-- Pilih Negara Terlebih Dahulu --"
+                : loadingProvinces
+                ? "-- Memuat Provinsi... --"
+                : provinces.length === 0
+                ? "-- Tidak Ada Provinsi --"
+                : "-- Pilih Provinsi --"}
             </option>
-          ))}
-        </select>
-        <select
-          name="province"
-          value={formData.province?._id || ""}
-          onChange={handleChange}
-          required
-          disabled={!formData.country || provinces.length === 0}
-          className="w-full p-3 border rounded-md bg-white disabled:bg-gray-100"
-        >
-          <option value="">-- Pilih Provinsi --</option>
-          {provinces.map((province) => (
-            <option key={province._id} value={province._id}>
-              {province.name}
-            </option>
-          ))}
-        </select>
+            {provinces.map((province) => (
+              <option key={province._id} value={province._id}>
+                {province.name}
+              </option>
+            ))}
+          </select>
+          {!selectedCountryId && (
+            <p className="text-sm text-amber-600 mt-1">
+              Silakan pilih negara terlebih dahulu
+            </p>
+          )}
+        </div>
       </div>
 
       <input

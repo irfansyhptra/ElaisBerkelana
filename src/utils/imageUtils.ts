@@ -1,5 +1,10 @@
 // Image path utilities for consistent image loading
-export const normalizeImagePath = (path: string): string => {
+export const normalizeImagePath = (path: string | undefined | null): string => {
+  // Handle null, undefined, or empty path
+  if (!path || typeof path !== "string" || path.trim() === "") {
+    return getImageFallback("");
+  }
+
   // Remove /public/ prefix if it exists
   if (path.startsWith("/public/")) {
     return path.replace("/public/", "/");
@@ -13,8 +18,12 @@ export const normalizeImagePath = (path: string): string => {
   return path;
 };
 
-export const validateImagePath = (path: string): boolean => {
+export const validateImagePath = (path: string | undefined | null): boolean => {
   // Check if path is valid and points to a supported image format
+  if (!path || typeof path !== "string") {
+    return false;
+  }
+
   const supportedFormats = [".jpg", ".jpeg", ".png", ".webp", ".svg"];
   const normalizedPath = normalizeImagePath(path);
 
@@ -23,14 +32,18 @@ export const validateImagePath = (path: string): boolean => {
   );
 };
 
-export const getImageFallback = (originalPath: string): string => {
+export const getImageFallback = (
+  originalPath: string | undefined | null
+): string => {
   // Provide appropriate fallback based on the type of image
-  if (originalPath.includes("/destinations/")) {
-    return "/images/destinations/gayo.jpg";
-  } else if (originalPath.includes("/team/")) {
-    return "/images/destinations/indo.jpg";
-  } else if (originalPath.includes("/testimonials/")) {
-    return "/images/destinations/gayo.jpg";
+  if (originalPath && typeof originalPath === "string") {
+    if (originalPath.includes("/destinations/")) {
+      return "/images/destinations/gayo.jpg";
+    } else if (originalPath.includes("/team/")) {
+      return "/images/destinations/indo.jpg";
+    } else if (originalPath.includes("/testimonials/")) {
+      return "/images/destinations/gayo.jpg";
+    }
   }
 
   // Default fallback

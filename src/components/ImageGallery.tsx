@@ -24,19 +24,34 @@ export default function ImageGallery({
     }
   };
 
+  // Guard clause for empty images
+  if (!images || images.length === 0) {
+    return (
+      <div className="space-y-4">
+        <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-200 flex items-center justify-center">
+          <p className="text-gray-500">Tidak ada gambar tersedia</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Ensure activeIndex is within bounds
+  const safeActiveIndex = Math.min(activeIndex, images.length - 1);
+  const currentImage = images[safeActiveIndex];
+
   return (
     <div className="space-y-4">
       {/* Main Image */}
       <div className="relative aspect-video rounded-lg overflow-hidden">
         <Image
-          src={images[activeIndex].url}
-          alt={images[activeIndex].caption}
+          src={currentImage.url}
+          alt={currentImage.caption}
           fill
           className="object-cover"
           priority
         />
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/50 backdrop-blur-sm">
-          <p className="text-white/90 text-sm">{images[activeIndex].caption}</p>
+          <p className="text-white/90 text-sm">{currentImage.caption}</p>
         </div>
       </div>
 

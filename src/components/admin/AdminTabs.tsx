@@ -7,7 +7,7 @@ interface AdminTabsProps {
 }
 
 const AdminTabs = ({ activeTab, setActiveTab }: AdminTabsProps) => {
-  const tabs = ["Destinasi", "Negara", "Provinsi"];
+  const tabs = ["Destinasi", "Negara", "Provinsi", "Kontak"];
 
   return (
     <div className="flex border-b mb-8">

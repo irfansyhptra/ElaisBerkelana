@@ -7,7 +7,10 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "dev:backend": "cd elaeis-berkelana-backend && npm run dev",
+    "dev:full": "concurrently \"npm run dev:backend\" \"npm run dev\"",
+    "seed": "cd elaeis-berkelana-backend && npm run seed"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -38,6 +41,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^8.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
     "postcss": "^8.5.6",

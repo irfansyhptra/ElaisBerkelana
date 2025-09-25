@@ -13,7 +13,7 @@ interface DestinationCardProps {
 
 const DestinationCard = ({ destination }: DestinationCardProps) => {
   // Buat URL berdasarkan slug, bukan ID
-  const href = `/destinations/${destination.countryId}/${destination.provinceId}/${destination.slug}`;
+  const href = `/destinations/${destination.country._id}/${destination.province._id}/${destination.slug}`;
 
   return (
     <motion.div
@@ -61,7 +61,7 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
             {/* Location tag */}
             <div className="mb-3">
               <span className="inline-block px-3 py-1 text-xs font-medium text-white/90 bg-white/20 backdrop-blur-sm rounded-full border border-white/20">
-                {destination.province}, {destination.country}
+                {destination.province.name}, {destination.country.name}
               </span>
             </div>
 

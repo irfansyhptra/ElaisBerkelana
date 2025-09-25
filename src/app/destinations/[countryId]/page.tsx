@@ -11,7 +11,7 @@ import { getCountries } from "@/lib/api";
 
 export default function CountryDestinationsPage() {
   const params = useParams();
-  const countrySlug = params.countryId as string;
+  const countryParam = params.countryId as string;
 
   const [countries, setCountries] = useState<Country[]>([]);
   const [provinces, setProvinces] = useState<Province[]>([]);
@@ -19,10 +19,15 @@ export default function CountryDestinationsPage() {
   const [selectedProvince, setSelectedProvince] = useState("all");
   const [loading, setLoading] = useState(true);
 
-  const currentCountry = useMemo(
-    () => countries.find((c) => c.slug === countrySlug),
-    [countries, countrySlug]
-  );
+  const currentCountry = useMemo(() => {
+    // Check if countryParam is an ID (MongoDB ObjectId format) or slug
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(countryParam);
+    if (isObjectId) {
+      return countries.find((c) => c._id === countryParam);
+    } else {
+      return countries.find((c) => c.slug === countryParam);
+    }
+  }, [countries, countryParam]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -30,14 +35,24 @@ export default function CountryDestinationsPage() {
         setLoading(true);
         const countryData = await getCountries();
         setCountries(countryData);
-        const country = countryData.find((c) => c.slug === countrySlug);
+
+        // Check if countryParam is an ID (MongoDB ObjectId format) or slug
+        const isObjectId = /^[0-9a-fA-F]{24}$/.test(countryParam);
+        let country;
+
+        if (isObjectId) {
+          country = countryData.find((c) => c._id === countryParam);
+        } else {
+          country = countryData.find((c) => c.slug === countryParam);
+        }
 
         if (country) {
           const provinceData = await getProvincesByCountry(country._id);
           setProvinces(provinceData);
+          // Load destinations for this country
           const destinationData = await getDestinations({
-            provinceSlug: "all",
-          }); // Load all for the country initially
+            countrySlug: country.slug,
+          });
           setDestinations(destinationData);
         }
       } catch (error) {
@@ -47,7 +62,7 @@ export default function CountryDestinationsPage() {
       }
     };
     loadData();
-  }, [countrySlug]);
+  }, [countryParam]);
 
   const filteredDestinations = useMemo(() => {
     if (selectedProvince === "all") return destinations;

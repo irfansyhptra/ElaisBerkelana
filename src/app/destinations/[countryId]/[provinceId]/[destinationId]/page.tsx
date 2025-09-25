@@ -1,10 +1,11 @@
-// src/app/destinations/[countryId]/[provinceId]/[destinationId]/page.tsx (Diperbaiki)
+// src/app/destinations/[countryId]/[provinceId]/[destinationId]/page.tsx
 "use client";
 
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { mockDestinations } from "@/data/destinations";
+import { useEffect, useState } from "react";
+import { getDestinationBySlug } from "@/lib/api";
 import ImageGallery from "@/components/ImageGallery";
 import Timeline from "@/components/Timeline";
 import SocialEmbed from "@/components/SocialEmbed";
@@ -14,16 +15,45 @@ import { Destination } from "@/types";
 export default function DestinationDetailPage() {
   const params = useParams();
   const destinationSlug = params.destinationId as string;
+  const [destination, setDestination] = useState<Destination | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const destination: Destination | undefined = mockDestinations.find(
-    (d: Destination) => d.slug === destinationSlug
-  );
+  useEffect(() => {
+    const fetchDestination = async () => {
+      try {
+        setLoading(true);
+        const data = await getDestinationBySlug(destinationSlug);
+        setDestination(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Gagal memuat destinasi");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!destination) {
+    if (destinationSlug) {
+      fetchDestination();
+    }
+  }, [destinationSlug]);
+
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center px-8">
         <div className="glass-card max-w-lg mx-auto">
-          <p className="text-gray-600">Destinasi tidak ditemukan</p>
+          <p className="text-gray-600">Memuat destinasi...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !destination) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-8">
+        <div className="glass-card max-w-lg mx-auto">
+          <p className="text-gray-600">
+            {error || "Destinasi tidak ditemukan"}
+          </p>
         </div>
       </div>
     );
@@ -35,7 +65,7 @@ export default function DestinationDetailPage() {
       {/* Full page background image */}
       <div className="fixed inset-0 z-0">
         <Image
-          src={destination.coverImage}
+          src={destination.images?.[0] || "/hero-background.png"}
           alt={destination.village}
           fill
           className="object-cover"
@@ -59,7 +89,7 @@ export default function DestinationDetailPage() {
                   {destination.village}
                 </h1>
                 <p className="text-xl text-white/90">
-                  {destination.province}, {destination.country}
+                  {destination.province.name}, {destination.country.name}
                 </p>
               </motion.div>
             </div>
@@ -87,9 +117,9 @@ export default function DestinationDetailPage() {
                 className="glass-card"
               >
                 <h2 className="title-medium text-white mb-6">
-                  Timeline Perjalanan
+                  Itinerary Perjalanan
                 </h2>
-                <Timeline items={destination.timeline} />
+                <Timeline items={destination.itinerary || []} />
               </motion.div>
 
               <motion.div
@@ -98,20 +128,22 @@ export default function DestinationDetailPage() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="glass-card"
               >
-                <h2 className="title-medium text-white mb-6">Highlights</h2>
+                <h2 className="title-medium text-white mb-6">Yang Termasuk</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {destination.highlights.map(
-                    (highlight: string, index: number) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="glass-card-minimal"
-                      >
-                        <p className="text-white/90 font-medium">{highlight}</p>
-                      </motion.div>
-                    )
+                  {destination.included?.map((item: string, index: number) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="glass-card-minimal"
+                    >
+                      <p className="text-white/90 font-medium">✓ {item}</p>
+                    </motion.div>
+                  )) || (
+                    <p className="text-white/70 col-span-2">
+                      Belum ada informasi yang termasuk
+                    </p>
                   )}
                 </div>
               </motion.div>
@@ -129,12 +161,17 @@ export default function DestinationDetailPage() {
                   <h3 className="text-xl font-semibold text-white mb-4">
                     Galeri Foto
                   </h3>
-                  <ImageGallery images={destination.imageGallery} />
+                  <ImageGallery
+                    images={(destination.images || []).map((url, index) => ({
+                      url,
+                      caption: `${destination.village} - Foto ${index + 1}`,
+                    }))}
+                  />
                 </div>
                 <SocialEmbed
                   youtubeUrl={destination.youtubeUrl}
-                  instagramUrl={destination.instagramUrl}
-                  tiktokUrl={destination.tiktokUrl}
+                  instagramUrl=""
+                  tiktokUrl=""
                 />
               </motion.div>
             </div>

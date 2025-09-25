@@ -2,7 +2,7 @@ export interface Country {
   _id: string;
   name: string;
   slug: string;
-  image: {
+  image?: {
     url: string;
     publicId: string;
   };
@@ -29,6 +29,7 @@ export interface Destination {
   province: Province;
   village: string;
   images: string[];
+  coverImage?: string;
   price: number;
   rating: number;
   duration: string;
@@ -36,7 +37,7 @@ export interface Destination {
   itinerary: Itinerary[];
   featured: boolean;
   createdAt: string;
-  youtubeUrl?: string; // Add this if you plan to use it
+  youtubeUrl?: string;
 }
 
 export interface Testimonial {

@@ -27,11 +27,11 @@ const FixedDestinationCard = ({
     setMounted(true);
   }, []);
 
-  const href = `/destinations/${destination.countryId}/${destination.provinceId}/${destination.slug}`;
+  const href = `/destinations/${destination.country._id}/${destination.province._id}/${destination.slug}`;
 
   // Use static classes during SSR, dynamic after hydration
   const backgroundImage = mounted
-    ? getCountryBackgroundImage(destination.countryId)
+    ? getCountryBackgroundImage(destination.country._id)
     : "/images/destinations/indo.jpg";
 
   // Create stable class mappings
@@ -39,11 +39,11 @@ const FixedDestinationCard = ({
     if (!mounted)
       return "bg-gradient-to-br from-emerald-900/70 via-blue-900/50 to-purple-900/60";
 
-    const gradientOverlay = getCountryGradientOverlay(destination.countryId);
-    if (destination.countryId === "1") {
+    const gradientOverlay = getCountryGradientOverlay(destination.country._id);
+    if (destination.country._id === "1") {
       return "bg-gradient-to-br from-red-900/70 via-red-700/40 to-red-800/60";
     }
-    if (destination.countryId === "2") {
+    if (destination.country._id === "2") {
       return "bg-gradient-to-br from-red-900/60 via-red-700/40 to-red-900/50";
     }
     return "bg-gradient-to-br from-emerald-900/70 via-blue-900/50 to-purple-900/60";
@@ -52,10 +52,10 @@ const FixedDestinationCard = ({
   const getAccentClasses = () => {
     if (!mounted) return "from-yellow-400 via-orange-500 to-red-500";
 
-    if (destination.countryId === "1") {
+    if (destination.country._id === "1") {
       return "from-red-600 via-red-500 to-red-400";
     }
-    if (destination.countryId === "2") {
+    if (destination.country._id === "2") {
       return "from-red-700 via-red-600 to-red-400";
     }
     return "from-yellow-400 via-orange-500 to-red-500";
@@ -110,7 +110,7 @@ const FixedDestinationCard = ({
               </h3>
 
               <p className="text-white/90 text-lg mb-4 drop-shadow-lg">
-                {destination.province}, {destination.country}
+                {destination.province.name}, {destination.country.name}
               </p>
 
               <div className="flex items-center space-x-4">
@@ -157,7 +157,9 @@ const FixedDestinationCard = ({
                 {destination.village}
               </h3>
 
-              <p className="text-white/70 text-sm">{destination.province}</p>
+              <p className="text-white/70 text-sm">
+                {destination.province.name}
+              </p>
             </div>
           </div>
         </Link>
@@ -173,7 +175,7 @@ const FixedDestinationCard = ({
           <div className="absolute inset-0">
             <OptimizedImage
               src={backgroundImage}
-              alt={`${destination.country} Banner`}
+              alt={`${destination.country.name} Banner`}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -200,7 +202,7 @@ const FixedDestinationCard = ({
             <div className="mb-3">
               <span className="inline-flex items-center px-3 py-1 text-xs font-medium text-white/95 bg-white/20 backdrop-blur-xl rounded-full border border-white/20 shadow-lg">
                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                {destination.province}, {destination.country}
+                {destination.province.name}, {destination.country.name}
               </span>
             </div>
 

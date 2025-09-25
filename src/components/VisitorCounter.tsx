@@ -34,7 +34,9 @@ const VisitorCounter = () => {
             Total Pengunjung
           </span>
           <span className="text-2xl font-bold text-gray-900 transition-all duration-300">
-            {visitorCount !== null ? (
+            {visitorCount !== null &&
+            visitorCount !== undefined &&
+            typeof visitorCount === "number" ? (
               visitorCount.toLocaleString("id-ID")
             ) : (
               <div className="animate-pulse">...</div>
