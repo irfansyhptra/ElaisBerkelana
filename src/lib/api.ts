@@ -118,12 +118,33 @@ export const createContact = async (data: {
   return { message: result.message || "Pesan berhasil terkirim!" };
 };
 
+// Delete destination
+export const deleteDestination = async (id: string): Promise<void> => {
+  const res = await fetch(`${API_URL}/destinations/${id}`, {
+    method: "DELETE",
+    headers: { "x-admin-key": ADMIN_KEY },
+  });
+  await handleResponse(res);
+};
+
+// Update destination
+export const updateDestination = async (
+  id: string,
+  data: Partial<Destination> | Record<string, unknown>
+): Promise<Destination> => {
+  const res = await fetch(`${API_URL}/destinations/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json", "x-admin-key": ADMIN_KEY },
+    body: JSON.stringify(data),
+  });
+  return handleResponse(res);
+};
+
 export const getContacts = async (
   filters: {
     status?: string;
     page?: number;
-    limit?: numb
-    er;
+    limit?: number;
   } = {}
 ): Promise<{
   contacts: Array<{
@@ -149,4 +170,200 @@ export const getContacts = async (
     headers: { "x-admin-key": ADMIN_KEY },
   });
   return handleResponse(res);
+};
+
+// --- Upload API ---
+export interface UploadResult {
+  publicId: string;
+  url: string;
+  width: number;
+  height: number;
+  format: string;
+  bytes: number;
+}
+
+export const uploadImage = async (file: File): Promise<UploadResult> => {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  const res = await fetch(`${API_URL}/upload/image`, {
+    method: "POST",
+    headers: { "x-admin-key": ADMIN_KEY },
+    body: formData,
+  });
+
+  const data = await res.json();
+  if (!res.ok || !data.success) {
+    throw new Error(data.message || "Gagal mengunggah gambar.");
+  }
+  return data.data;
+};
+
+export const uploadMultipleImages = async (
+  files: File[]
+): Promise<UploadResult[]> => {
+  const formData = new FormData();
+  files.forEach((file) => {
+    formData.append("images", file);
+  });
+
+  const res = await fetch(`${API_URL}/upload/images`, {
+    method: "POST",
+    headers: { "x-admin-key": ADMIN_KEY },
+    body: formData,
+  });
+
+  const data = await res.json();
+  if (!res.ok || !data.success) {
+    throw new Error(data.message || "Gagal mengunggah gambar.");
+  }
+  return data.data;
+};
+
+export const deleteImage = async (publicId: string): Promise<void> => {
+  const res = await fetch(
+    `${API_URL}/upload/image/${encodeURIComponent(publicId)}`,
+    {
+      method: "DELETE",
+      headers: { "x-admin-key": ADMIN_KEY },
+    }
+  );
+
+  const data = await res.json();
+  if (!res.ok || !data.success) {
+    throw new Error(data.message || "Gagal menghapus gambar.");
+  }
+};
+
+// --- Gallery API ---
+export interface GalleryImage {
+  id: string;
+  url: string;
+  title: string;
+  village: string;
+  country: string;
+  province: string;
+  type: string;
+  createdAt: string;
+  category: "cover" | "banner" | "gallery";
+  destinationId: string;
+  imageIndex?: number;
+}
+
+export interface GalleryResponse {
+  success: boolean;
+  count: number;
+  total?: number;
+  totalPages?: number;
+  currentPage?: number;
+  hasNext?: boolean;
+  hasPrev?: boolean;
+  data: GalleryImage[];
+  destinations?: number;
+}
+
+export const getAllDestinationImages = async (): Promise<GalleryImage[]> => {
+  const res = await fetch(`${API_URL}/gallery/images`, {
+    headers: { "x-admin-key": ADMIN_KEY },
+  });
+  const data: GalleryResponse = await res.json();
+  if (!res.ok || !data.success) {
+    throw new Error("Failed to fetch destination images");
+  }
+  return data.data;
+};
+
+export const getDestinationImagesWithPagination = async (
+  options: {
+    page?: number;
+    limit?: number;
+    category?: "cover" | "banner" | "gallery" | "all";
+    type?: "village" | "plantation" | "mill" | "research" | "community";
+  } = {}
+): Promise<GalleryResponse> => {
+  const params = new URLSearchParams();
+  if (options.page) params.append("page", options.page.toString());
+  if (options.limit) params.append("limit", options.limit.toString());
+  if (options.category) params.append("category", options.category);
+  if (options.type) params.append("type", options.type);
+
+  const res = await fetch(
+    `${API_URL}/gallery/images/paginated?${params.toString()}`,
+    {
+      headers: { "x-admin-key": ADMIN_KEY },
+    }
+  );
+  const data: GalleryResponse = await res.json();
+  if (!res.ok || !data.success) {
+    throw new Error("Failed to fetch paginated destination images");
+  }
+  return data;
+};
+
+// --- Media API ---
+export interface MediaItem {
+  _id: string;
+  desa?: {
+    _id: string;
+    name: string;
+    slug: string;
+  };
+  type: "image" | "youtube";
+  caption?: string;
+  tags?: string[];
+  image?: {
+    url: string;
+    publicId: string;
+    width: number;
+    height: number;
+    format: string;
+  };
+  youtube?: {
+    videoId: string;
+    originalUrl: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface MediaResponse {
+  page: number;
+  total: number;
+  pages: number;
+  items: MediaItem[];
+}
+
+export const getMedia = async (
+  options: {
+    desaId?: string;
+    type?: "image" | "youtube";
+    page?: number;
+    limit?: number;
+  } = {}
+): Promise<MediaResponse> => {
+  const params = new URLSearchParams();
+  if (options.desaId) params.append("desaId", options.desaId);
+  if (options.type) params.append("type", options.type);
+  if (options.page) params.append("page", options.page.toString());
+  if (options.limit) params.append("limit", options.limit.toString());
+
+  const res = await fetch(`${API_URL}/media?${params.toString()}`, {
+    headers: { "x-admin-key": ADMIN_KEY },
+  });
+  const data: MediaResponse = await res.json();
+  if (!res.ok) {
+    throw new Error("Failed to fetch media");
+  }
+  return data;
+};
+
+export const getYouTubeVideos = async (
+  options: { limit?: number } = {}
+): Promise<MediaItem[]> => {
+  const response = await getMedia({
+    type: "youtube",
+    limit: options.limit || 6,
+    page: 1,
+  });
+  return response.items;
 };

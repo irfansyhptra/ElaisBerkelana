@@ -4,38 +4,29 @@ import { JournalEntry } from "@/types";
 export const mockJournalEntries: JournalEntry[] = [
   {
     id: "1",
-    title: "Petualangan di Gayo Highlands",
-    date: "2024-01-15",
-    category: "Travel Experience",
-    imageUrl: "/images/destinations/gayo.jpg",
+    title: "Eksplorasi Kebun Sawit Berkelanjutan di Riau",
+    date: "2024-03-15",
+    category: "Dokumentasi",
+    imageUrl: "/images/destinations/indo.jpg",
     excerpt:
-      "Merasakan kehangatan masyarakat Gayo dan menikmati secangkir kopi arabika terbaik di dataran tinggi Aceh. Perjalanan yang tak terlupakan dengan pemandangan yang memukau.",
+      "Menyaksikan langsung praktik berkelanjutan dalam pengelolaan kebun kelapa sawit yang ramah lingkungan dan memberdayakan masyarakat lokal.",
   },
   {
     id: "2",
-    title: "Keberagaman Budaya Indonesia",
-    date: "2024-02-01",
-    category: "Cultural Journey",
-    imageUrl: "/images/destinations/indo.jpg",
+    title: "Kisah Petani Sawit Mandiri di Kalimantan",
+    date: "2024-03-10",
+    category: "Komunitas",
+    imageUrl: "/images/destinations/gayo.jpg",
     excerpt:
-      "Menjelajahi kekayaan budaya Nusantara melalui desa wisata yang menampilkan berbagai tradisi dan kerajinan lokal. Pengalaman yang memperkaya wawasan tentang Indonesia.",
+      "Perjalanan menginspirasi bersama petani sawit yang berhasil membangun koperasi dan meningkatkan kesejahteraan keluarga melalui praktik pertanian berkelanjutan.",
   },
   {
     id: "3",
-    title: "Sustainable Tourism di Era Modern",
-    date: "2024-02-15",
-    category: "Sustainability",
-    imageUrl: "/images/destinations/gayo.jpg",
-    excerpt:
-      "Bagaimana pariwisata berkelanjutan dapat memberikan dampak positif bagi masyarakat lokal dan lingkungan. Cerita dari lapangan tentang implementasi eco-tourism.",
-  },
-  {
-    id: "4",
-    title: "Tips Traveling Responsif",
-    date: "2024-03-01",
-    category: "Travel Tips",
+    title: "Inovasi Teknologi Ramah Lingkungan",
+    date: "2024-03-05",
+    category: "Teknologi",
     imageUrl: "/images/destinations/indo.jpg",
     excerpt:
-      "Panduan praktis untuk melakukan perjalanan yang bertanggung jawab, mulai dari persiapan hingga interaksi dengan masyarakat lokal. Traveling yang memberikan manfaat untuk semua.",
+      "Mengulas penerapan teknologi terdepan dalam pengolahan kelapa sawit yang mengurangi jejak karbon dan meningkatkan efisiensi produksi.",
   },
 ];

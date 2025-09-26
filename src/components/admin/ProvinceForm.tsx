@@ -22,7 +22,7 @@ const ProvinceForm = () => {
       try {
         const countryData = await getCountries();
         setCountries(countryData);
-      } catch (err) {
+      } catch {
         setError("Gagal memuat data negara.");
       }
     };
@@ -68,7 +68,7 @@ const ProvinceForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-8 rounded-xl shadow-lg space-y-6"
+      className="bg-white/90 backdrop-blur-md p-8 rounded-xl shadow-xl border border-white/20 space-y-6"
     >
       <h2 className="text-2xl font-bold text-gray-800">Kelola Data Provinsi</h2>
       {error && (

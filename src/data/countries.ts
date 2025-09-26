@@ -3,21 +3,21 @@ import { Country } from "@/types";
 
 export const mockCountries: Country[] = [
   {
-    _id: "1",
+    _id: "indonesia",
     name: "Indonesia",
     slug: "indonesia",
     image: {
       url: "/images/destinations/indo.jpg",
-      publicId: "indo",
+      publicId: "destinations/indo",
     },
   },
   {
-    _id: "2",
-    name: "Jepang",
-    slug: "jepang",
+    _id: "malaysia",
+    name: "Malaysia",
+    slug: "malaysia",
     image: {
-      url: "/images/destinations/gayo.jpg", // Using available image
-      publicId: "gayo",
+      url: "/images/destinations/gayo.jpg",
+      publicId: "destinations/gayo",
     },
   },
 ];

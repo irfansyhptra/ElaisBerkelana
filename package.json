@@ -10,7 +10,10 @@
     "lint": "eslint",
     "dev:backend": "cd elaeis-berkelana-backend && npm run dev",
     "dev:full": "concurrently \"npm run dev:backend\" \"npm run dev\"",
-    "seed": "cd elaeis-berkelana-backend && npm run seed"
+    "seed": "cd elaeis-berkelana-backend && npm run seed",
+    "cleanup": "node scripts/cleanup.mjs",
+    "analyze": "npm run build && npx @next/bundle-analyzer .next",
+    "optimize": "npm run cleanup && npm run build"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -36,7 +39,6 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

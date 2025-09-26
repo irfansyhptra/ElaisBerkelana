@@ -1,39 +1,21 @@
-// src/app/page.tsx (Enhanced with Glassmorphism)
+// src/app/page.tsx (Enhanced with Dynamic Data & Modern UI)
 "use client";
 
 import HeroSection from "@/components/HeroSection";
-import { Testimonial, JournalEntry, Destination } from "@/types";
+import { JournalEntry } from "@/types";
 import AboutSection from "@/components/AboutSection";
-import TestimonialCard from "@/components/TestimonialCard";
-import { testimonials } from "@/data/testimonials";
 import JournalCard from "@/components/JournalCard";
 import { mockJournalEntries } from "@/data/journal";
 import ImpactSection from "@/components/ImpactSection";
 import ModernDestinationCard from "@/components/ModernDestinationCard";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { getDestinations } from "@/lib/api";
+import ModernButton from "@/components/ModernButton";
+import YouTubeSection from "@/components/YouTubeSection";
+import { useHomepageData } from "@/hooks/useHomepageData";
+import { RefreshCw, Loader2, AlertCircle } from "lucide-react";
 
 export default function Home() {
-  const [featuredDestinations, setFeaturedDestinations] = useState<
-    Destination[]
-  >([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadFeaturedDestinations = async () => {
-      try {
-        const destinations = await getDestinations({ featured: true });
-        setFeaturedDestinations(destinations.slice(0, 3)); // Show only 3 featured destinations
-      } catch (error) {
-        console.error("Failed to load featured destinations:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadFeaturedDestinations();
-  }, []);
+  const { featuredDestinations, youtubeVideos, loading, error, refreshData } =
+    useHomepageData();
 
   return (
     <div className="relative">
@@ -42,68 +24,106 @@ export default function Home() {
       </section>
 
       {/* Featured Destinations Section */}
-      <section className="section-minimal relative">
+      <section className="section-minimal relative mobile-safe-area">
         <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-white/30 to-blue-50/50"></div>
-        <div className="relative z-10 w-full px-8 lg:px-16 xl:px-20">
-          <div className="text-center mb-16">
+        <div className="responsive-container relative z-10">
+          <div className="text-center responsive-margin">
             <div className="glass-card-liquid max-w-4xl mx-auto">
-              <h2 className="title-large text-gray-900 mb-4" data-aos="fade-up">
-                Destinasi Unggulan
+              <h2
+                className="responsive-text-xl font-bold text-gray-900 mb-4"
+                data-aos="fade-up"
+              >
+                Program Unggulan
               </h2>
               <p
-                className="text-xl text-gray-600 font-light"
+                className="responsive-text-base text-gray-600 font-light"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Jelajahi destinasi-destinasi pilihan yang menampilkan dampak
-                positif industri kelapa sawit terhadap pemberdayaan masyarakat
-                lokal.
+                Jelajahi program-program sosial kelapa sawit yang telah terbukti
+                memberikan dampak positif dan memberdayakan masyarakat lokal di
+                seluruh Indonesia.
               </p>
             </div>
           </div>
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
-              <p className="mt-4 text-gray-600">Memuat destinasi unggulan...</p>
+              <div className="glass-card flex items-center gap-3">
+                <Loader2 className="w-6 h-6 animate-spin text-green-600" />
+                <span className="text-gray-700 text-lg">
+                  Memuat program unggulan...
+                </span>
+              </div>
+            </div>
+          ) : error ? (
+            <div className="text-center py-12">
+              <div className="glass-card border-red-500/30 bg-red-500/10">
+                <AlertCircle className="w-8 h-8 text-red-500 mx-auto mb-4" />
+                <p className="text-red-700 mb-4">{error}</p>
+                <ModernButton
+                  onClick={refreshData}
+                  variant="outline"
+                  size="sm"
+                  icon="none"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  Coba Lagi
+                </ModernButton>
+              </div>
             </div>
           ) : featuredDestinations.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {featuredDestinations.map(
-                (destination: Destination, index: number) => (
-                  <div
-                    key={destination._id}
-                    data-aos="fade-up"
-                    data-aos-delay={100 * index}
-                    className="glass-card-liquid hover:scale-105 transition-transform duration-500"
-                  >
-                    <ModernDestinationCard destination={destination} />
-                  </div>
-                )
-              )}
+            <div className="responsive-grid">
+              {featuredDestinations.map((destination, index) => (
+                <div
+                  key={destination._id}
+                  data-aos="fade-up"
+                  data-aos-delay={100 * index}
+                  className="glass-card-liquid hover:scale-105 transition-transform duration-500"
+                >
+                  <ModernDestinationCard destination={destination} />
+                </div>
+              ))}
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-gray-600">
-                Belum ada destinasi unggulan tersedia.
-              </p>
+              <div className="glass-card">
+                <p className="text-gray-600 mb-4">
+                  Belum ada program unggulan tersedia.
+                </p>
+                <ModernButton
+                  onClick={refreshData}
+                  variant="glass"
+                  size="sm"
+                  icon="none"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  Refresh Data
+                </ModernButton>
+              </div>
             </div>
           )}
 
           <div className="text-center mt-12" data-aos="fade-up">
-            <div className="glass-card-minimal inline-block">
-              <Link href="/destinations" className="btn-primary">
-                Lihat Semua Destinasi
-              </Link>
-            </div>
+            <ModernButton
+              href="/destinations"
+              variant="primary"
+              size="lg"
+              className="shadow-2xl hover:shadow-green-500/30"
+            >
+              Lihat Semua Program
+            </ModernButton>
           </div>
         </div>
       </section>
 
       {/* Enhanced Journal Section with Glass Effect */}
-      <section id="journal" className="section-minimal relative">
+      <section
+        id="journal"
+        className="section-minimal relative mobile-safe-area"
+      >
         <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 via-white/30 to-orange-50/50"></div>
-        <div className="relative z-10 w-full px-8 lg:px-16 xl:px-20">
+        <div className="responsive-container relative z-10">
           <div className="text-center mb-16">
             <div className="glass-card-liquid max-w-4xl mx-auto">
               <h2 className="title-large text-gray-900 mb-4" data-aos="fade-up">
@@ -119,7 +139,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="responsive-grid">
             {mockJournalEntries
               .slice(0, 3)
               .map((entry: JournalEntry, index: number) => (
@@ -134,46 +154,54 @@ export default function Home() {
               ))}
           </div>
           <div className="text-center mt-12" data-aos="fade-up">
-            <div className="glass-card-minimal inline-block">
-              <Link href="/journal" className="btn-primary">
-                Lihat Semua Dokumentasi
-              </Link>
-            </div>
+            <ModernButton
+              href="/journal"
+              variant="secondary"
+              size="lg"
+              className="shadow-2xl hover:shadow-blue-500/30"
+            >
+              Lihat Semua Dokumentasi
+            </ModernButton>
           </div>
         </div>
       </section>
 
-      {/* Enhanced Testimonial Section with Glass Effect */}
-      <section className="section-minimal relative">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white/20 to-green-50/40"></div>
-        <div className="relative z-10 w-full px-8 lg:px-16 xl:px-20">
+      {/* YouTube Video Section */}
+      <section className="section-minimal relative mobile-safe-area">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-50/30 via-white/20 to-orange-50/40"></div>
+        <div className="responsive-container relative z-10">
           <div className="text-center mb-16">
             <div className="glass-card-liquid max-w-4xl mx-auto">
               <h2 className="title-large text-gray-900 mb-4" data-aos="fade-up">
-                Suara Dari Lapangan
+                Video Dokumentasi
               </h2>
               <p
                 className="text-xl text-gray-600 font-light"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Testimoni langsung dari petani, kepala desa, dan stakeholder
-                industri kelapa sawit yang telah merasakan dampak positifnya.
+                Saksikan langsung kisah perubahan positif industri kelapa sawit
+                melalui video dokumentasi dari berbagai daerah di Indonesia.
               </p>
             </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {testimonials.map((testimonial: Testimonial, index: number) => (
-              <div
-                key={testimonial.id}
-                data-aos="fade-up"
-                data-aos-delay={100 * index}
-                className="glass-card-liquid hover:scale-105 transition-transform duration-500"
+
+          {/* YouTube Section Component */}
+          <YouTubeSection className="py-8" />
+
+          {youtubeVideos.length > 6 && (
+            <div className="text-center mt-12" data-aos="fade-up">
+              <ModernButton
+                href="/journal"
+                variant="outline"
+                size="lg"
+                icon="external"
+                className="shadow-lg hover:shadow-red-500/20"
               >
-                <TestimonialCard testimonial={testimonial} />
-              </div>
-            ))}
-          </div>
+                Lihat Semua Video
+              </ModernButton>
+            </div>
+          )}
         </div>
       </section>
 

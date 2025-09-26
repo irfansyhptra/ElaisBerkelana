@@ -33,12 +33,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className={`${inter.variable} ${playfair.variable}`}>
-      {/* Pastikan body memiliki kelas ini untuk mendorong footer ke bawah */}
-      <body className="min-h-screen flex flex-col bg-white">
+      {/* Responsive layout with mobile-first approach */}
+      <body className="min-h-screen flex flex-col bg-white overflow-x-hidden">
         <ClientLayout>
           <Navbar />
-          {/* Main content akan mengisi ruang yang tersedia */}
-          <main className="flex-grow">{children}</main>
+          {/* Main content with mobile padding considerations */}
+          <main className="flex-grow pb-16 sm:pb-0">{children}</main>
           <Footer />
         </ClientLayout>
       </body>

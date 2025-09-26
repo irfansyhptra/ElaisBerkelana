@@ -34,9 +34,13 @@ const CountryForm = () => {
       if (fileInput) {
         fileInput.value = "";
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Backend error:", error);
-      setError(error.message || "Gagal menambahkan negara. Silakan coba lagi.");
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Gagal menambahkan negara. Silakan coba lagi."
+      );
     } finally {
       setLoading(false);
     }
@@ -45,7 +49,7 @@ const CountryForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-8 rounded-xl shadow-lg space-y-6"
+      className="bg-white/90 backdrop-blur-md p-8 rounded-xl shadow-xl border border-white/20 space-y-6"
     >
       <h2 className="text-2xl font-bold text-gray-800">Kelola Data Negara</h2>
 

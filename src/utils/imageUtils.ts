@@ -5,6 +5,15 @@ export const normalizeImagePath = (path: string | undefined | null): string => {
     return getImageFallback("");
   }
 
+  // Handle Cloudinary URLs (keep as is)
+  if (
+    path.includes("cloudinary.com") ||
+    path.startsWith("http://") ||
+    path.startsWith("https://")
+  ) {
+    return path;
+  }
+
   // Remove /public/ prefix if it exists
   if (path.startsWith("/public/")) {
     return path.replace("/public/", "/");

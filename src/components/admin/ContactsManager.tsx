@@ -65,7 +65,7 @@ const ContactsManager = () => {
   }
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-lg">
+    <div className="bg-white/90 backdrop-blur-md p-8 rounded-xl shadow-xl border border-white/20">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Kelola Kontak</h2>
         <select

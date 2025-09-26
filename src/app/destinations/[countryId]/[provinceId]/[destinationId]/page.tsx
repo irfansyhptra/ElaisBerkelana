@@ -10,6 +10,10 @@ import ImageGallery from "@/components/ImageGallery";
 import Timeline from "@/components/Timeline";
 import SocialEmbed from "@/components/SocialEmbed";
 import VisitorCounter from "@/components/VisitorCounter";
+import FacilitiesSection from "@/components/FacilitiesSection";
+import HighlightsSection from "@/components/HighlightsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import DetailInfoSection from "@/components/DetailInfoSection";
 import { Destination } from "@/types";
 
 export default function DestinationDetailPage() {
@@ -117,36 +121,25 @@ export default function DestinationDetailPage() {
                 className="glass-card"
               >
                 <h2 className="title-medium text-white mb-6">
-                  Itinerary Perjalanan
+                  Program Pemberdayaan
                 </h2>
-                <Timeline items={destination.itinerary || []} />
+                <Timeline items={destination.programs || []} />
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="glass-card"
-              >
-                <h2 className="title-medium text-white mb-6">Yang Termasuk</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {destination.included?.map((item: string, index: number) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="glass-card-minimal"
-                    >
-                      <p className="text-white/90 font-medium">✓ {item}</p>
-                    </motion.div>
-                  )) || (
-                    <p className="text-white/70 col-span-2">
-                      Belum ada informasi yang termasuk
-                    </p>
-                  )}
-                </div>
-              </motion.div>
+              {/* Detail Info Section */}
+              <DetailInfoSection destination={destination} />
+
+              {/* Benefits Section */}
+              <HighlightsSection highlights={destination.keyBenefits} />
+
+              {/* Resources Section */}
+              <FacilitiesSection facilities={destination.resources} />
+
+              {/* Social Media Section */}
+              <SocialEmbed socialMedia={destination.socialMedia} />
+
+              {/* Testimonials Section */}
+              <TestimonialsSection testimonials={destination.testimonials} />
             </div>
 
             {/* Sidebar */}
@@ -168,11 +161,7 @@ export default function DestinationDetailPage() {
                     }))}
                   />
                 </div>
-                <SocialEmbed
-                  youtubeUrl={destination.youtubeUrl}
-                  instagramUrl=""
-                  tiktokUrl=""
-                />
+                <VisitorCounter />
               </motion.div>
             </div>
           </div>

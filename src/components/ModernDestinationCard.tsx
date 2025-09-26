@@ -1,8 +1,8 @@
 // src/components/ModernDestinationCard.tsx
-// This component is deprecated, use FixedDestinationCard instead
+// This component is deprecated, use DestinationCard instead
 "use client";
 
-import FixedDestinationCard from "./FixedDestinationCard";
+import DestinationCard from "./DestinationCard";
 import { Destination } from "@/types";
 
 interface ModernDestinationCardProps {
@@ -11,11 +11,8 @@ interface ModernDestinationCardProps {
 }
 
 // Wrapper component for backward compatibility
-const ModernDestinationCard = ({
-  destination,
-  variant = "default",
-}: ModernDestinationCardProps) => {
-  return <FixedDestinationCard destination={destination} variant={variant} />;
+const ModernDestinationCard = ({ destination }: ModernDestinationCardProps) => {
+  return <DestinationCard destination={destination} />;
 };
 
 export default ModernDestinationCard;

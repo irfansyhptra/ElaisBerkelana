@@ -3,8 +3,8 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { Menu, X, Home, MapPin, Camera, Info, Phone } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,10 +19,26 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { href: "/destinations", label: "Lokasi Sawit" },
-    { href: "/journal", label: "Dokumentasi" },
-    { href: "/about", label: "Tentang" },
-    { href: "/contact", label: "Kontak" },
+    { href: "/", label: "Beranda", icon: Home, mobileLabel: "Home" },
+    {
+      href: "/destinations",
+      label: "Program Sawit",
+      icon: MapPin,
+      mobileLabel: "Program",
+    },
+    {
+      href: "/journal",
+      label: "Dokumentasi",
+      icon: Camera,
+      mobileLabel: "Dokumentasi",
+    },
+    {
+      href: "/about",
+      label: "Tentang Misi",
+      icon: Info,
+      mobileLabel: "Tentang",
+    },
+    { href: "/contact", label: "Kontak", icon: Phone, mobileLabel: "Kontak" },
   ];
 
   return (
@@ -51,25 +67,26 @@ const Navbar = () => {
         ></div>
       </div>
 
-      <div className="relative container mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="relative container mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
         <Link
           href="/"
-          className={`text-2xl font-bold tracking-wider transition-all duration-300 hover:scale-105 ${
+          className={`text-lg sm:text-xl md:text-2xl font-bold tracking-wider transition-all duration-300 hover:scale-105 ${
             isScrolled || isMenuOpen
               ? "bg-gradient-to-r from-white via-green-100 to-white bg-clip-text text-transparent hover:from-green-200 hover:via-white hover:to-green-200"
               : "bg-gradient-to-r from-white via-green-100 to-white bg-clip-text text-transparent hover:from-green-100 hover:via-white hover:to-green-100"
           }`}
         >
-          ELAEIS BERKELANA
+          <span className="hidden sm:inline">ELAEIS BERKELANA</span>
+          <span className="sm:hidden">ELAEIS</span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
+        <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+          {navLinks.slice(1).map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`relative transition-all duration-300 group py-2 px-4 hover:scale-105 ${
+              className={`relative transition-all duration-300 group py-2 px-3 xl:px-4 hover:scale-105 text-sm xl:text-base ${
                 isScrolled || isMenuOpen
                   ? "text-white/95 hover:text-white"
                   : "text-white/90 hover:text-white"
@@ -93,7 +110,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`z-50 transition-all duration-300 glass-card p-2 rounded-full hover:scale-110 ${
@@ -102,40 +119,98 @@ const Navbar = () => {
                 : "text-white hover:text-white/80 border-white/20 hover:border-white/40"
             }`}
           >
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Enhanced Mobile Menu Dropdown */}
-      {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 glass-card-liquid flex flex-col items-center justify-center space-y-8 border-0 rounded-none">
-          {/* Background decoration */}
-          <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-transparent to-orange-900/20"></div>
-          <div className="absolute top-20 left-20 w-32 h-32 bg-white/5 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-40 h-40 bg-green-500/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
-
-          {navLinks.map((link, index) => (
+      {/* Enhanced Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            onClick={() => setIsMenuOpen(false)}
+          >
             <motion.div
-              key={link.href}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="relative z-10"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="absolute right-0 top-0 h-full w-80 max-w-[85vw] glass-card-liquid border-l border-white/20 rounded-l-3xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <Link
-                href={link.href}
-                className="glass-card-minimal text-gray-800 text-3xl hover:text-green-700 
-                           transition-all duration-300 transform hover:scale-110 
-                           px-8 py-4 rounded-2xl border-white/40 hover:border-white/60"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
+              {/* Close button */}
+              <div className="flex justify-end p-6">
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="glass-card p-2 rounded-full hover:scale-110 transition-all duration-300 text-gray-700 hover:text-gray-900"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="px-6 py-4 space-y-4">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className="flex items-center gap-4 p-4 rounded-2xl glass-card-minimal hover:glass-card transition-all duration-300 group"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      <link.icon
+                        size={20}
+                        className="text-green-600 group-hover:text-green-700 transition-colors"
+                      />
+                      <span className="text-gray-800 group-hover:text-gray-900 font-medium">
+                        {link.mobileLabel}
+                      </span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Footer */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="glass-card-minimal p-4 text-center">
+                  <p className="text-sm text-gray-600">Elaeis Berkelana</p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Sustainable Palm Oil Journey
+                  </p>
+                </div>
+              </div>
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Bottom Navigation (for very small screens) */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 glass-navbar-dark border-t border-white/10 safe-area-bottom">
+        <div className="grid grid-cols-5 py-2">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="flex flex-col items-center justify-center py-3 px-1 transition-all duration-200 active:bg-white/20 active:scale-95 rounded-lg mx-1 touch-manipulation"
+              style={{ minHeight: "44px" }} // iOS minimum touch target
+            >
+              <link.icon size={18} className="text-white/80 mb-1" />
+              <span className="text-xs text-white/70 text-center leading-tight">
+                {link.mobileLabel}
+              </span>
+            </Link>
           ))}
         </div>
-      )}
+      </div>
     </nav>
   );
 };

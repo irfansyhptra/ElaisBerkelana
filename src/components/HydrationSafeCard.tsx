@@ -247,8 +247,23 @@ const HydrationSafeCard = ({
             </div>
           </div>
 
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          {/* Banner overlay on hover - shows uploaded banner */}
+          {destination.coverImage && (
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-25 transition-opacity duration-500">
+              <OptimizedImage
+                src={normalizeImagePath(destination.coverImage)}
+                alt={`Banner ${destination.title}`}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/50"></div>
+            </div>
+          )}
+
+          {/* Fallback hover overlay jika tidak ada banner */}
+          {!destination.coverImage && (
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          )}
         </div>
       </Link>
     </div>

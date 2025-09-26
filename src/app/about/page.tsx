@@ -8,7 +8,7 @@ export default function AboutPage() {
       {/* Full page background image */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/hero-background1.jpg"
+          src="/hero-background.png"
           alt="About Background"
           fill
           className="object-cover"
@@ -27,8 +27,8 @@ export default function AboutPage() {
                 Tentang Elaies Berkelana
               </h1>
               <p className="text-xl text-white/90">
-                Menjelajahi keindahan tersembunyi Indonesia, satu desa dalam
-                satu waktu
+                Mengungkap dampak positif kelapa sawit untuk masyarakat
+                Indonesia
               </p>
             </div>
           </div>
@@ -37,56 +37,59 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-start max-w-7xl mx-auto">
             <div className="glass-card h-fit">
               <h2 className="title-medium text-white mb-6">
-                Selamat Datang di Perjalanan Saya
+                Selamat Datang di Misi Kami
               </h2>
               <div className="space-y-4 text-white/90">
                 <p>
                   Elaies Berkelana adalah sebuah platform yang didedikasikan
-                  untuk membagikan pengalaman dan cerita dari perjalanan saya
-                  mengunjungi berbagai desa di Indonesia. Setiap perjalanan
-                  membawa perspektif baru dan pemahaman mendalam tentang
-                  kekayaan budaya negeri ini.
+                  untuk mengungkap dan membagikan cerita nyata tentang dampak
+                  positif industri kelapa sawit terhadap kehidupan masyarakat
+                  Indonesia. Kami mengunjungi berbagai desa, perkebunan, dan
+                  komunitas untuk mendokumentasikan transformasi sosial dan
+                  ekonomi yang terjadi.
                 </p>
                 <p>
-                  Melalui dokumentasi video, foto, dan cerita, saya berusaha
-                  menangkap esensi kehidupan di setiap desa yang saya kunjungi.
-                  Dari keramahtamahan penduduk lokal hingga kearifan tradisional
-                  yang masih terjaga.
+                  Melalui dokumentasi video, foto, dan wawancara mendalam, kami
+                  mengungkap bagaimana industri kelapa sawit telah memberikan
+                  kesempatan kerja, meningkatkan infrastruktur, dan
+                  memberdayakan ekonomi lokal di berbagai komunitas.
                 </p>
                 <p>
-                  Tujuan saya sederhana: berbagi keindahan tersembunyi Indonesia
-                  dan menginspirasi lebih banyak orang untuk mengapresiasi
-                  kehidupan pedesaan yang autentik.
+                  Tujuan kami adalah menampilkan sisi positif industri kelapa
+                  sawit yang berkelanjutan dan menginspirasi lebih banyak
+                  program sosial yang dapat mengangkat kesejahteraan masyarakat
+                  pedesaan.
                 </p>
               </div>
               <div className="mt-8">
                 <Link href="/destinations" className="btn-primary inline-block">
-                  Jelajahi Destinasi
+                  Lihat Program Kami
                 </Link>
               </div>
             </div>
 
             <div className="glass-card h-fit">
               <h3 className="title-medium text-white mb-6">
-                Highlight Perjalanan
+                Fokus Program Kami
               </h3>
               <ul className="space-y-6">
                 <li className="flex items-start space-x-4">
-                  <span className="text-orange-400 text-2xl">✦</span>
+                  <span className="text-green-400 text-2xl">🌱</span>
                   <div>
                     <h4 className="font-semibold text-white text-lg">
-                      Dokumentasi Autentik
+                      Dampak Sosial Nyata
                     </h4>
                     <p className="text-white/80">
-                      Merekam momen dan cerita nyata dari setiap desa
+                      Mengukur dan mendokumentasikan perubahan positif dalam
+                      kehidupan masyarakat
                     </p>
                   </div>
                 </li>
                 <li className="flex items-start space-x-4">
-                  <span className="text-orange-400 text-2xl">✦</span>
+                  <span className="text-green-400 text-2xl">🌱</span>
                   <div>
                     <h4 className="font-semibold text-white text-lg">
-                      Interaksi Lokal
+                      Pemberdayaan Ekonomi
                     </h4>
                     <p className="text-white/80">
                       Mengenal lebih dekat kehidupan masyarakat desa

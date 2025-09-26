@@ -41,20 +41,20 @@ export default function HeroSection() {
       {/* Enhanced Parallax Overlay */}
       <div className="parallax-overlay"></div>
 
-      {/* Floating Glass Elements */}
+      {/* Floating Glass Elements - Responsive */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-white/5 backdrop-blur-sm rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-green-500/10 backdrop-blur-sm rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute bottom-32 left-20 w-20 h-20 bg-orange-500/10 backdrop-blur-sm rounded-full animate-pulse delay-500"></div>
-        <div className="absolute bottom-20 right-10 w-28 h-28 bg-blue-500/10 backdrop-blur-sm rounded-full animate-pulse delay-700"></div>
+        <div className="absolute top-16 sm:top-20 left-4 sm:left-10 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 bg-white/5 backdrop-blur-sm rounded-full animate-pulse"></div>
+        <div className="absolute top-32 sm:top-40 right-4 sm:right-20 w-12 sm:w-18 md:w-24 h-12 sm:h-18 md:h-24 bg-green-500/10 backdrop-blur-sm rounded-full animate-pulse delay-1000"></div>
+        <div className="absolute bottom-24 sm:bottom-32 left-4 sm:left-20 w-10 sm:w-16 md:w-20 h-10 sm:h-16 md:h-20 bg-orange-500/10 backdrop-blur-sm rounded-full animate-pulse delay-500"></div>
+        <div className="absolute bottom-16 sm:bottom-20 right-4 sm:right-10 w-14 sm:w-20 md:w-28 h-14 sm:h-20 md:h-28 bg-blue-500/10 backdrop-blur-sm rounded-full animate-pulse delay-700"></div>
       </div>
 
-      {/* Content container with enhanced glass effect */}
-      <div className="parallax-content text-center text-white px-4 max-w-6xl mx-auto">
-        <div className="text-center p-12 mb-8">
+      {/* Content container with enhanced glass effect - Mobile Responsive */}
+      <div className="parallax-content text-center text-white px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto mobile-safe-area">
+        <div className="text-center p-6 sm:p-8 md:p-12 mb-6 sm:mb-8">
           <SplitText
             text="ELAEIS "
-            className="title-large text-green-500 mb-5 leading-none"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-green-500 mb-3 sm:mb-5 leading-none"
             delay={100}
             duration={0.8}
             ease="power3.out"
@@ -68,7 +68,7 @@ export default function HeroSection() {
           />
           <SplitText
             text="BERKELANA"
-            className="title-large text-yellow-400 leading-none"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-yellow-400 leading-none"
             delay={150}
             duration={0.8}
             ease="power3.out"
@@ -84,25 +84,25 @@ export default function HeroSection() {
         {/* Subtitle with glass background */}
         <div className="mb-8 max-w-4xl mx-auto">
           <p className="text-xl md:text-2xl text-white-700 leading-relaxed">
-            Dokumentasi perjalanan sosial mengeksplorasi dampak positif industri 
-            kelapa sawit terhadap pemberdayaan masyarakat dan pembangunan berkelanjutan 
-            di berbagai desa Indonesia.
+            Mengungkap cerita nyata tentang bagaimana industri kelapa sawit
+            berkelanjutan memberdayakan masyarakat, menciptakan lapangan kerja,
+            dan membangun masa depan yang lebih baik di seluruh Indonesia.
           </p>
         </div>
 
         {/* Enhanced button layout */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
           <button className="btn-primary text-lg px-12 py-5">
-            Mulai Eksplorasi
+            Lihat Program Kami
           </button>
           <button className="btn-secondary text-lg px-12 py-5">
-            Pelajari Lebih Lanjut
+            Tentang Misi Kami
           </button>
         </div>
 
         {/* Visitor counter with glass effect */}
         <div className="flex justify-center">
-            <VisitorCounter />
+          <VisitorCounter />
         </div>
       </div>
     </section>
