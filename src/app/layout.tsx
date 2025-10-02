@@ -21,7 +21,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "ELAIES BERKELANA | Kisah dari Pelosok Negeri",
+  title: "ELAEIS BERKELANA | Kisah dari Pelosok Negeri",
   description:
     "Arsip perjalanan personal menelusuri denyut kehidupan di desa-desa Indonesia. Temukan cerita, budaya, dan keindahan yang jarang tersentuh.",
   keywords:

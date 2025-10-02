@@ -19,10 +19,10 @@
 
 ```typescript
 // Scraped & Added:
-'about.title': 'Tentang Elaies Berkelana' | 'About Elaies Berkelana'
+'about.title': 'Tentang Elaeis Berkelana' | 'About Elaeis Berkelana'
 'about.subtitle': 'Mengungkap dampak positif...' | 'Unveiling the positive impact...'
 'about.welcome.title': 'Selamat Datang di Misi Kami' | 'Welcome to Our Mission'
-'about.welcome.description1': 'Elaies Berkelana adalah sebuah platform...' | 'Elaies Berkelana is a platform...'
+'about.welcome.description1': 'Elaeis Berkelana adalah sebuah platform...' | 'Elaeis Berkelana is a platform...'
 'about.welcome.description2': 'Melalui dokumentasi video...' | 'Through video documentation...'
 'about.welcome.description3': 'Tujuan kami adalah menampilkan...' | 'Our goal is to showcase...'
 'about.welcome.cta': 'Lihat Program Kami' | 'View Our Programs'

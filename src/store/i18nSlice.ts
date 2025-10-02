@@ -54,7 +54,7 @@ const translations = {
     "nav.mobile.contact": "Kontak",
 
     // Footer
-    "footer.copyright": "ELAIES BERKELANA. All Rights Reserved.",
+    "footer.copyright": "ELAEIS BERKELANA. All Rights Reserved.",
     "footer.description": "Sustainable Palm Oil Journey",
 
     // Hero Section
@@ -117,12 +117,12 @@ const translations = {
       "Dokumentasi visual akan muncul di sini setelah gambar destinasi diupload melalui admin panel.",
 
     // About Page
-    "about.title": "Tentang Elaies Berkelana",
+    "about.title": "Tentang Elaeis Berkelana",
     "about.subtitle":
       "Mengungkap dampak positif kelapa sawit untuk masyarakat Indonesia",
     "about.welcome.title": "Selamat Datang di Misi Kami",
     "about.welcome.description1":
-      "Elaies Berkelana adalah sebuah platform yang didedikasikan untuk mengungkap dan membagikan cerita nyata tentang dampak positif industri kelapa sawit terhadap kehidupan masyarakat Indonesia. Kami mengunjungi berbagai desa, perkebunan, dan komunitas untuk mendokumentasikan transformasi sosial dan ekonomi yang terjadi.",
+      "Elaeis Berkelana adalah sebuah platform yang didedikasikan untuk mengungkap dan membagikan cerita nyata tentang dampak positif industri kelapa sawit terhadap kehidupan masyarakat Indonesia. Kami mengunjungi berbagai desa, perkebunan, dan komunitas untuk mendokumentasikan transformasi sosial dan ekonomi yang terjadi.",
     "about.welcome.description2":
       "Melalui dokumentasi video, foto, dan wawancara mendalam, kami mengungkap bagaimana industri kelapa sawit telah memberikan kesempatan kerja, meningkatkan infrastruktur, dan memberdayakan ekonomi lokal di berbagai komunitas.",
     "about.welcome.description3":
@@ -193,6 +193,8 @@ const translations = {
     // Social Media
     "social.instagram": "Instagram",
     "social.youtube": "YouTube",
+    "social.tiktok": "TikTok",
+    "social.linkedin": "LinkedIn",
     "social.email": "Email",
 
     // Visitor Counter
@@ -254,7 +256,7 @@ const translations = {
     "nav.mobile.contact": "Contact",
 
     // Footer
-    "footer.copyright": "ELAIES BERKELANA. All Rights Reserved.",
+    "footer.copyright": "ELAEIS BERKELANA. All Rights Reserved.",
     "footer.description": "Sustainable Palm Oil Journey",
 
     // Hero Section
@@ -317,12 +319,12 @@ const translations = {
       "Visual documentation will appear here after destination images are uploaded through admin panel.",
 
     // About Page
-    "about.title": "About Elaies Berkelana",
+    "about.title": "About Elaeis Berkelana",
     "about.subtitle":
       "Unveiling the positive impact of palm oil for Indonesian society",
     "about.welcome.title": "Welcome to Our Mission",
     "about.welcome.description1":
-      "Elaies Berkelana is a platform dedicated to uncovering and sharing real stories about the positive impact of the palm oil industry on the lives of Indonesian communities. We visit various villages, plantations, and communities to document the social and economic transformation that occurs.",
+      "Elaeis Berkelana is a platform dedicated to uncovering and sharing real stories about the positive impact of the palm oil industry on the lives of Indonesian communities. We visit various villages, plantations, and communities to document the social and economic transformation that occurs.",
     "about.welcome.description2":
       "Through video documentation, photos, and in-depth interviews, we reveal how the palm oil industry has provided job opportunities, improved infrastructure, and empowered local economies in various communities.",
     "about.welcome.description3":
@@ -393,6 +395,8 @@ const translations = {
     // Social Media
     "social.instagram": "Instagram",
     "social.youtube": "YouTube",
+    "social.tiktok": "TikTok",
+    "social.linkedin": "LinkedIn",
     "social.email": "Email",
 
     // Visitor Counter
