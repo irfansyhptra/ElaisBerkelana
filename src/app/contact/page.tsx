@@ -3,8 +3,10 @@
 
 import ContactForm from "@/components/ContactForm";
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function ContactPage() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen relative">
       <div className="fixed inset-0 z-0">
@@ -22,9 +24,9 @@ export default function ContactPage() {
         <div className="w-full max-w-4xl px-8">
           <div className="glass-card p-8 md:p-12">
             <div className="text-center mb-12">
-              <h1 className="title-large text-white mb-4">Hubungi Saya</h1>
+              <h1 className="title-large text-white mb-4">{t('contact.title')}</h1>
               <p className="text-xl text-white/90">
-                Punya pertanyaan, ide kolaborasi, atau sekadar ingin menyapa?
+                {t('contact.description')}
               </p>
             </div>
             <ContactForm />

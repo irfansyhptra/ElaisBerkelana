@@ -4,6 +4,7 @@
 import Image from "next/image";
 import MarqueeSection from "@/components/MarqueeSection";
 import { useGalleryImages } from "@/hooks/useGalleryImages";
+import { useTranslation } from "@/hooks/useTranslation";
 import {
   Loader2,
   Image as ImageIcon,
@@ -20,6 +21,7 @@ export default function JournalPage() {
     refresh,
     lastUpdated,
   } = useGalleryImages(30000);
+  const { t } = useTranslation();
 
   // Split images into chunks of 10
   const chunkedImages = [];
@@ -47,18 +49,20 @@ export default function JournalPage() {
           <div className="glass-card max-w-5xl mx-auto">
             <div className="flex items-center justify-center gap-3 mb-4">
               <ImageIcon className="w-8 h-8 text-emerald-400" />
-              <h1 className="title-large text-white">Dokumentasi Visual</h1>
+              <h1 className="title-large text-white">{t("journal.title")}</h1>
             </div>
             <p className="text-xl text-white/90 mb-6">
-              Koleksi lengkap foto dari semua destinasi sawit berkelanjutan yang
-              telah didokumentasikan
+              {t("journal.description")}
             </p>
 
             {/* Stats */}
             <div className="flex items-center justify-center gap-8 text-white/80 flex-wrap">
               <div className="flex items-center gap-2">
                 <ImageIcon className="w-5 h-5 text-emerald-400" />
-                <span>{loading ? "..." : allImages.length} Foto</span>
+                <span>
+                  {loading ? "..." : allImages.length}{" "}
+                  {t("journal.stats.photos")}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-5 h-5 text-blue-400" />
@@ -67,15 +71,17 @@ export default function JournalPage() {
                     ? "..."
                     : new Set(allImages.map((img) => img.destinationId))
                         .size}{" "}
-                  Destinasi
+                  {t("journal.stats.destinations")}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-purple-400" />
                 <span>
                   {lastUpdated
-                    ? `Update: ${lastUpdated.toLocaleTimeString("id-ID")}`
-                    : "Real-time Update"}
+                    ? t("journal.stats.lastUpdate", {
+                        time: lastUpdated.toLocaleTimeString("id-ID"),
+                      })
+                    : t("journal.stats.realTimeUpdate")}
                 </span>
               </div>
               <button
@@ -86,7 +92,7 @@ export default function JournalPage() {
                 <RefreshCw
                   className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
                 />
-                <span className="text-sm">Refresh</span>
+                <span className="text-sm">{t("common.refresh")}</span>
               </button>
             </div>
           </div>
@@ -150,15 +156,16 @@ export default function JournalPage() {
             <div className="glass-card text-center">
               <div className="text-6xl mb-6">📷</div>
               <h3 className="text-2xl font-bold text-white mb-4">
-                Belum Ada Dokumentasi
+                {t("journal.noDocumentation.title")}
               </h3>
               <p className="text-white/70 mb-6">
-                Dokumentasi visual akan muncul di sini setelah gambar destinasi
-                diupload melalui admin panel.
+                {t("journal.noDocumentation.description")}
               </p>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 text-emerald-300 rounded-full border border-emerald-400/30">
                 <Calendar className="w-4 h-4" />
-                <span className="text-sm">Auto-refresh setiap 30 detik</span>
+                <span className="text-sm">
+                  {t("journal.stats.autoRefresh")}
+                </span>
               </div>
             </div>
           </div>

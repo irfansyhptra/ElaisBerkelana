@@ -3,6 +3,7 @@
 import VisitorCounter from "./VisitorCounter";
 import Image from "next/image";
 import SplitText from "./SplitText";
+import { useTranslation } from "@/hooks/useTranslation";
 import { useEffect, useState } from "react";
 
 const handleAnimationComplete = () => {
@@ -11,6 +12,7 @@ const handleAnimationComplete = () => {
 
 export default function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -53,7 +55,7 @@ export default function HeroSection() {
       <div className="parallax-content text-center text-white px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto mobile-safe-area">
         <div className="text-center p-6 sm:p-8 md:p-12 mb-6 sm:mb-8">
           <SplitText
-            text="ELAEIS "
+            text={`${t("hero.title1")} `}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-green-500 mb-3 sm:mb-5 leading-none"
             delay={100}
             duration={0.8}
@@ -67,7 +69,7 @@ export default function HeroSection() {
             onLetterAnimationComplete={handleAnimationComplete}
           />
           <SplitText
-            text="BERKELANA"
+            text={t("hero.title2")}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-yellow-400 leading-none"
             delay={150}
             duration={0.8}
@@ -84,19 +86,17 @@ export default function HeroSection() {
         {/* Subtitle with glass background */}
         <div className="mb-8 max-w-4xl mx-auto">
           <p className="text-xl md:text-2xl text-white-700 leading-relaxed">
-            Mengungkap cerita nyata tentang bagaimana industri kelapa sawit
-            berkelanjutan memberdayakan masyarakat, menciptakan lapangan kerja,
-            dan membangun masa depan yang lebih baik di seluruh Indonesia.
+            {t("hero.subtitle")}
           </p>
         </div>
 
         {/* Enhanced button layout */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
           <button className="btn-primary text-lg px-12 py-5">
-            Lihat Program Kami
+            {t("hero.cta.primary")}
           </button>
           <button className="btn-secondary text-lg px-12 py-5">
-            Tentang Misi Kami
+            {t("hero.cta.secondary")}
           </button>
         </div>
 

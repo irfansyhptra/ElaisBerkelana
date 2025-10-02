@@ -11,11 +11,13 @@ import ModernDestinationCard from "@/components/ModernDestinationCard";
 import ModernButton from "@/components/ModernButton";
 import YouTubeSection from "@/components/YouTubeSection";
 import { useHomepageData } from "@/hooks/useHomepageData";
+import { useTranslation } from "@/hooks/useTranslation";
 import { RefreshCw, Loader2, AlertCircle } from "lucide-react";
 
 export default function Home() {
   const { featuredDestinations, youtubeVideos, loading, error, refreshData } =
     useHomepageData();
+  const { t } = useTranslation();
 
   return (
     <div className="relative">
@@ -33,16 +35,14 @@ export default function Home() {
                 className="responsive-text-xl font-bold text-gray-900 mb-4"
                 data-aos="fade-up"
               >
-                Program Unggulan
+                {t("home.featuredPrograms.title")}
               </h2>
               <p
                 className="responsive-text-base text-gray-600 font-light"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Jelajahi program-program sosial kelapa sawit yang telah terbukti
-                memberikan dampak positif dan memberdayakan masyarakat lokal di
-                seluruh Indonesia.
+                {t("home.featuredPrograms.description")}
               </p>
             </div>
           </div>
@@ -88,9 +88,7 @@ export default function Home() {
           ) : (
             <div className="text-center py-12">
               <div className="glass-card">
-                <p className="text-gray-600 mb-4">
-                  Belum ada program unggulan tersedia.
-                </p>
+                <p className="text-gray-600 mb-4">{t("empty.noPrograms")}</p>
                 <ModernButton
                   onClick={refreshData}
                   variant="glass"
@@ -98,7 +96,7 @@ export default function Home() {
                   icon="none"
                 >
                   <RefreshCw className="w-4 h-4" />
-                  Refresh Data
+                  {t("common.refreshData")}
                 </ModernButton>
               </div>
             </div>
@@ -111,7 +109,7 @@ export default function Home() {
               size="lg"
               className="shadow-2xl hover:shadow-green-500/30"
             >
-              Lihat Semua Program
+              {t("home.featuredPrograms.cta")}
             </ModernButton>
           </div>
         </div>
@@ -127,15 +125,14 @@ export default function Home() {
           <div className="text-center mb-16">
             <div className="glass-card-liquid max-w-4xl mx-auto">
               <h2 className="title-large text-gray-900 mb-4" data-aos="fade-up">
-                Dokumentasi Terbaru
+                {t("home.latestDocumentation.title")}
               </h2>
               <p
                 className="text-xl text-gray-600 font-light"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Catatan perjalanan terbaru dalam mendokumentasikan dampak
-                positif industri kelapa sawit di berbagai wilayah Indonesia.
+                {t("home.latestDocumentation.description")}
               </p>
             </div>
           </div>
@@ -160,7 +157,7 @@ export default function Home() {
               size="lg"
               className="shadow-2xl hover:shadow-blue-500/30"
             >
-              Lihat Semua Dokumentasi
+              {t("home.latestDocumentation.cta")}
             </ModernButton>
           </div>
         </div>
@@ -173,15 +170,14 @@ export default function Home() {
           <div className="text-center mb-16">
             <div className="glass-card-liquid max-w-4xl mx-auto">
               <h2 className="title-large text-gray-900 mb-4" data-aos="fade-up">
-                Video Dokumentasi
+                {t("home.videoDocumentation.title")}
               </h2>
               <p
                 className="text-xl text-gray-600 font-light"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Saksikan langsung kisah perubahan positif industri kelapa sawit
-                melalui video dokumentasi dari berbagai daerah di Indonesia.
+                {t("home.videoDocumentation.description")}
               </p>
             </div>
           </div>

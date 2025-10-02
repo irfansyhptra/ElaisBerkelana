@@ -5,6 +5,7 @@ import ModernDestinationCard from "@/components/ModernDestinationCard";
 import { useEffect, useState } from "react";
 import { Country, PalmOilDestination } from "@/types";
 import { getCountries, getDestinations } from "@/lib/api";
+import { useTranslation } from "@/hooks/useTranslation";
 import Image from "next/image";
 
 export default function DestinationsPage() {
@@ -12,6 +13,7 @@ export default function DestinationsPage() {
   const [destinations, setDestinations] = useState<PalmOilDestination[]>([]);
   const [loading, setLoading] = useState(true);
   const [showDestinations, setShowDestinations] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const loadData = async () => {
@@ -44,7 +46,7 @@ export default function DestinationsPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        Loading...
+        {t("common.loading")}
       </div>
     );
   }
@@ -66,11 +68,10 @@ export default function DestinationsPage() {
           <div className="text-center mb-16">
             <div className="glass-card max-w-4xl mx-auto">
               <h1 className="title-large text-white mb-4">
-                Program Kelapa Sawit
+                {t("destinations.title")}
               </h1>
               <p className="text-xl text-white/90">
-                Jelajahi program sosial kelapa sawit yang memberdayakan
-                masyarakat di berbagai negara.
+                {t("destinations.description")}
               </p>
 
               {/* Toggle buttons */}
@@ -83,7 +84,7 @@ export default function DestinationsPage() {
                       : "bg-white/20 text-white/80 hover:bg-white/30"
                   }`}
                 >
-                  Semua Program
+                  {t("common.all")} {t("nav.destinations")}
                 </button>
                 <button
                   onClick={() => setShowDestinations(false)}
@@ -103,7 +104,7 @@ export default function DestinationsPage() {
             <div>
               <div className="mb-8 text-center">
                 <p className="text-white/80">
-                  Menampilkan {destinations.length} program kelapa sawit
+                  {t("admin.showingPrograms", { count: destinations.length })}
                 </p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">

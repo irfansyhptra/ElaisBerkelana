@@ -5,10 +5,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X, Home, MapPin, Camera, Info, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import LanguageSelector from "@/components/LanguageSelector";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,26 +22,26 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { href: "/", label: "Beranda", icon: Home, mobileLabel: "Home" },
+    { href: "/", label: t('nav.home'), icon: Home, mobileLabel: t('nav.mobile.home') },
     {
       href: "/destinations",
-      label: "Program Sawit",
+      label: t('nav.destinations'),
       icon: MapPin,
-      mobileLabel: "Program",
+      mobileLabel: t('nav.mobile.destinations'),
     },
     {
       href: "/journal",
-      label: "Dokumentasi",
+      label: t('nav.journal'),
       icon: Camera,
-      mobileLabel: "Dokumentasi",
+      mobileLabel: t('nav.mobile.journal'),
     },
     {
       href: "/about",
-      label: "Tentang Misi",
+      label: t('nav.about'),
       icon: Info,
-      mobileLabel: "Tentang",
+      mobileLabel: t('nav.mobile.about'),
     },
-    { href: "/contact", label: "Kontak", icon: Phone, mobileLabel: "Kontak" },
+    { href: "/contact", label: t('nav.contact'), icon: Phone, mobileLabel: t('nav.mobile.contact') },
   ];
 
   return (
@@ -107,6 +110,9 @@ const Navbar = () => {
               ></span>
             </Link>
           ))}
+          
+          {/* Language Selector */}
+          <LanguageSelector variant="navbar" />
         </div>
 
         {/* Mobile Menu Button */}
@@ -179,12 +185,22 @@ const Navbar = () => {
                 ))}
               </div>
 
+              {/* Language Selector in Mobile Menu */}
+              <div className="px-6 py-4">
+                <div className="glass-card-minimal p-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-700 font-medium">{t('language.select')}</span>
+                    <LanguageSelector variant="minimal" />
+                  </div>
+                </div>
+              </div>
+
               {/* Footer */}
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="glass-card-minimal p-4 text-center">
                   <p className="text-sm text-gray-600">Elaeis Berkelana</p>
                   <p className="text-xs text-gray-500 mt-1">
-                    Sustainable Palm Oil Journey
+                    {t('footer.description')}
                   </p>
                 </div>
               </div>

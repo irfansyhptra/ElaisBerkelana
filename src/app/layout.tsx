@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ClientLayout from "@/components/ClientLayout";
+import ReduxProvider from "@/providers/ReduxProvider";
+import FloatingLanguageSelector from "@/components/FloatingLanguageSelector";
 
 // Font configurations
 const inter = Inter({
@@ -35,12 +37,15 @@ export default function RootLayout({
     <html lang="id" className={`${inter.variable} ${playfair.variable}`}>
       {/* Responsive layout with mobile-first approach */}
       <body className="min-h-screen flex flex-col bg-white overflow-x-hidden">
-        <ClientLayout>
-          <Navbar />
-          {/* Main content with mobile padding considerations */}
-          <main className="flex-grow pb-16 sm:pb-0">{children}</main>
-          <Footer />
-        </ClientLayout>
+        <ReduxProvider>
+          <ClientLayout>
+            <Navbar />
+            <FloatingLanguageSelector />
+            {/* Main content with mobile padding considerations */}
+            <main className="flex-grow pb-16 sm:pb-0">{children}</main>
+            <Footer />
+          </ClientLayout>
+        </ReduxProvider>
       </body>
     </html>
   );
