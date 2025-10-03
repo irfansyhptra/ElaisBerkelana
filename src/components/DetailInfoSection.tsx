@@ -10,7 +10,7 @@ interface DetailInfoSectionProps {
 const DetailInfoSection = ({ destination }: DetailInfoSectionProps) => {
   const infoItems = [
     {
-      icon: "�",
+      icon: "🌳",
       label: "Jenis Program",
       value:
         destination.type === "village"
@@ -76,7 +76,7 @@ const DetailInfoSection = ({ destination }: DetailInfoSectionProps) => {
       </div>
 
       {/* Benefits and Challenges */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Key Benefits */}
         {destination.keyBenefits && destination.keyBenefits.length > 0 && (
           <div>
@@ -86,8 +86,8 @@ const DetailInfoSection = ({ destination }: DetailInfoSectionProps) => {
             <ul className="space-y-2">
               {destination.keyBenefits.map((benefit: string, index: number) => (
                 <li key={index} className="flex items-start gap-2">
-                  <span className="text-green-400 mt-1 flex-shrink-0">✓</span>
-                  <span className="text-white/90">{benefit}</span>
+                  <span className="text-black-400 mt-1 flex-shrink-0">✓</span>
+                  <span className="text-black/90">{benefit}</span>
                 </li>
               ))}
             </ul>

@@ -279,29 +279,30 @@ section {
   }
 
   .glass-card-minimal {
-    @apply bg-white/80 backdrop-blur-xl border border-white/60 rounded-2xl p-8 
-           hover:bg-white/90 transition-all duration-500 shadow-2xl hover:shadow-3xl
-           hover:scale-[1.02] hover:border-white/80;
+    @apply bg-white/5 backdrop-blur-2xl border border-white/20 rounded-2xl p-4 sm:p-6 md:p-8 
+           hover:bg-white/10 transition-all duration-500 shadow-xl hover:shadow-2xl
+           hover:scale-[1.01] hover:border-white/30;
     background-image: radial-gradient(
         circle at 50% 0%,
-        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0.08) 0%,
         transparent 50%
       ),
       linear-gradient(
         180deg,
-        rgba(255, 255, 255, 0.2) 0%,
-        rgba(255, 255, 255, 0.05) 100%
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.02) 100%
       );
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
 
   .glass-card-liquid {
-    @apply bg-gradient-to-br from-white/90 via-white/80 to-white/70 
-           backdrop-blur-2xl border border-white/50 rounded-3xl p-8
+    @apply bg-gradient-to-br from-white/15 via-white/10 to-white/5 
+           backdrop-blur-2xl border border-white/20 rounded-3xl p-4 sm:p-6 md:p-8
            transition-all duration-700
-           hover:scale-[1.03] hover:bg-gradient-to-br hover:from-white/95 
-           hover:via-white/85 hover:to-white/75;
+           hover:scale-[1.03] hover:bg-gradient-to-br hover:from-white/20 
+           hover:via-white/15 hover:to-white/10;
     background-image: radial-gradient(
         circle at 30% 20%,
         rgba(46, 125, 50, 0.1) 0%,
