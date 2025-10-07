@@ -58,7 +58,7 @@ export default function AboutPage() {
               </h3>
               <ul className="space-y-6">
                 <li className="flex items-start space-x-4">
-                  <span className="text-green-400 text-2xl">🌱</span>
+                  <span className="text-blue-400 text-2xl">👥</span>
                   <div>
                     <h4 className="font-semibold text-white text-lg">
                       {t("about.values.socialImpact.title")}
@@ -69,24 +69,24 @@ export default function AboutPage() {
                   </div>
                 </li>
                 <li className="flex items-start space-x-4">
-                  <span className="text-green-400 text-2xl">🌱</span>
+                  <span className="text-green-400 text-2xl">�</span>
+                  <div>
+                    <h4 className="font-semibold text-white text-lg">
+                      {t("about.values.environment.title")}
+                    </h4>
+                    <p className="text-white/80">
+                      {t("about.values.environment.description")}
+                    </p>
+                  </div>
+                </li>
+                <li className="flex items-start space-x-4">
+                  <span className="text-amber-400 text-2xl">💰</span>
                   <div>
                     <h4 className="font-semibold text-white text-lg">
                       {t("about.values.economicEmpowerment.title")}
                     </h4>
                     <p className="text-white/80">
                       {t("about.values.economicEmpowerment.description")}
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start space-x-4">
-                  <span className="text-orange-400 text-2xl">✦</span>
-                  <div>
-                    <h4 className="font-semibold text-white text-lg">
-                      {t("about.values.stories.title")}
-                    </h4>
-                    <p className="text-white/80">
-                      {t("about.values.stories.description")}
                     </p>
                   </div>
                 </li>

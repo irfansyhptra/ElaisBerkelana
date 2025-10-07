@@ -1,5 +1,6 @@
 // src/components/AboutSection.tsx
 import OptimizedImage from "./OptimizedImage";
+import Link from "next/link";
 
 const AboutSection = () => {
   return (
@@ -18,7 +19,7 @@ const AboutSection = () => {
             <div className="glass-card-liquid p-6 hover:scale-105 transition-transform duration-700">
               <OptimizedImage
                 src="/images/destinations/gayo.jpg"
-                alt="Foto Elais"
+                alt="Foto Elaeis"
                 width={600}
                 height={600}
                 className="rounded-2xl object-cover w-full h-auto hover:scale-105 transition-transform duration-500"
@@ -34,7 +35,7 @@ const AboutSection = () => {
             <div className="glass-card-liquid hover:scale-[1.02] transition-transform duration-500">
               <div className="space-y-6">
                 <h2 className="title-large text-gray-900 leading-tight">
-                  Tentang Elais
+                  Tentang Elaeis
                 </h2>
 
                 <div className="glass-card-minimal inline-block px-6 py-3">
@@ -46,29 +47,33 @@ const AboutSection = () => {
                 <div className="space-y-6 text-lg font-light leading-relaxed">
                   <div className="glass-card-minimal p-6">
                     <p className="text-gray-700">
-                      Halo, saya Elais. Perjalanan saya bukan sekadar berkelana, 
-                      melainkan misi mendokumentasikan dampak positif industri kelapa 
-                      sawit terhadap kehidupan masyarakat Indonesia. Setiap desa yang 
-                      saya kunjungi menceritakan kisah transformasi ekonomi dan sosial 
-                      yang luar biasa.
+                      Halo, saya Elaeis. Perjalanan saya bukan sekadar
+                      berkelana, melainkan misi mendokumentasikan dampak
+                      industri kelapa sawit terhadap kehidupan masyarakat
+                      Indonesia. Setiap desa yang saya kunjungi menceritakan
+                      kisah transformasi ekonomi dan sosial yang luar biasa.
                     </p>
                   </div>
 
                   <div className="glass-card-minimal p-6">
                     <p className="text-gray-700">
-                      Melalui &ldquo;Elaeis Berkelana&rdquo;, saya berbagi cerita autentik tentang 
-                      bagaimana kelapa sawit tidak hanya mengubah lanskap ekonomi pedesaan, 
-                      tetapi juga memberdayakan petani kecil, meningkatkan akses pendidikan, 
-                      dan mendorong inovasi teknologi berkelanjutan di berbagai wilayah Indonesia.
+                      Melalui &ldquo;Elaeis Berkelana&rdquo;, saya berbagi
+                      cerita autentik tentang bagaimana kelapa sawit tidak hanya
+                      mengubah lanskap ekonomi pedesaan, tetapi juga
+                      memberdayakan petani kecil, meningkatkan akses pendidikan,
+                      dan mendorong inovasi teknologi berkelanjutan di berbagai
+                      wilayah Indonesia.
                     </p>
                   </div>
                 </div>
 
                 {/* Call to action with glass effect */}
                 <div className="glass-card-minimal p-6 text-center">
-                  <button className="btn-primary text-lg px-8 py-4">
-                    Jelajahi Dokumentasi Kelapa Sawit
-                  </button>
+                  <Link href="/journal">
+                    <button className="bg-gradient-to-r from-green-600 to-orange-600 text-white font-semibold text-lg px-8 py-4 rounded-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                      Jelajahi Dokumentasi Kelapa Sawit
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

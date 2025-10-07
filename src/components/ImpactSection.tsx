@@ -2,7 +2,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, GraduationCap, Leaf, TrendingUp, Heart, Building } from "lucide-react";
+import Link from "next/link";
+import {
+  Users,
+  GraduationCap,
+  Leaf,
+  TrendingUp,
+  Heart,
+  Building,
+} from "lucide-react";
 
 interface ImpactData {
   icon: React.ReactNode;
@@ -17,44 +25,47 @@ const impactData: ImpactData[] = [
     icon: <Users size={32} />,
     title: "Pemberdayaan Petani",
     value: "15,000+",
-    description: "Keluarga petani yang terdampak positif dari program kemitraan kelapa sawit",
-    color: "text-green-600"
+    description:
+      "Keluarga petani yang terdampak dari program kemitraan kelapa sawit",
+    color: "text-green-600",
   },
   {
     icon: <GraduationCap size={32} />,
     title: "Akses Pendidikan",
     value: "250+",
-    description: "Anak petani yang mendapat beasiswa pendidikan dari program CSR",
-    color: "text-blue-600"
+    description:
+      "Anak petani yang mendapat beasiswa pendidikan dari program CSR",
+    color: "text-blue-600",
   },
   {
     icon: <Leaf size={32} />,
     title: "Teknologi Hijau",
     value: "85%",
-    description: "Pengurangan limbah melalui inovasi pengolahan ramah lingkungan",
-    color: "text-emerald-600"
+    description:
+      "Pengurangan limbah melalui inovasi pengolahan ramah lingkungan",
+    color: "text-emerald-600",
   },
   {
     icon: <TrendingUp size={32} />,
     title: "Peningkatan Ekonomi",
     value: "300%",
     description: "Rata-rata peningkatan pendapatan keluarga petani plasma",
-    color: "text-orange-600"
+    color: "text-orange-600",
   },
   {
     icon: <Heart size={32} />,
     title: "Fasilitas Kesehatan",
     value: "45+",
     description: "Klinik dan puskesmas yang dibangun di area perkebunan",
-    color: "text-red-500"
+    color: "text-red-500",
   },
   {
     icon: <Building size={32} />,
     title: "Infrastruktur Desa",
     value: "120+",
     description: "Desa yang mendapat bantuan pembangunan infrastruktur",
-    color: "text-purple-600"
-  }
+    color: "text-purple-600",
+  },
 ];
 
 const ImpactSection = () => {
@@ -74,9 +85,14 @@ const ImpactSection = () => {
             <h2 className="title-large text-gray-900 mb-6" data-aos="fade-up">
               Dampak Nyata di Lapangan
             </h2>
-            <p className="text-xl text-gray-600 font-light leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-              Melalui perjalanan berkelana, kami menemukan bukti konkret bagaimana industri kelapa sawit 
-              berkelanjutan memberikan dampak positif yang terukur bagi masyarakat Indonesia.
+            <p
+              className="text-xl text-gray-600 font-light leading-relaxed"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              Melalui perjalanan berkelana, kami menemukan bukti konkret
+              bagaimana industri kelapa sawit berkelanjutan memberikan dampak
+              yang terukur bagi masyarakat Indonesia.
             </p>
           </div>
         </div>
@@ -98,15 +114,15 @@ const ImpactSection = () => {
                     {impact.icon}
                   </div>
                 </div>
-                
+
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {impact.title}
                 </h3>
-                
+
                 <div className={`text-4xl font-bold ${impact.color} mb-4`}>
                   {impact.value}
                 </div>
-                
+
                 <p className="text-gray-600 leading-relaxed">
                   {impact.description}
                 </p>
@@ -125,12 +141,15 @@ const ImpactSection = () => {
               Ingin Tahu Lebih Dalam?
             </h3>
             <p className="text-gray-600 mb-6">
-              Ikuti perjalanan dokumentasi lengkap untuk melihat bagaimana kelapa sawit 
-              berkelanjutan mengubah kehidupan masyarakat Indonesia.
+              Ikuti perjalanan dokumentasi lengkap untuk melihat bagaimana
+              kelapa sawit berkelanjutan mengubah kehidupan masyarakat
+              Indonesia.
             </p>
-            <button className="btn-primary text-lg px-10 py-4">
-              Eksplorasi Selengkapnya
-            </button>
+            <Link href="/destinations">
+              <button className="btn-primary text-lg px-10 py-4">
+                Eksplorasi Selengkapnya
+              </button>
+            </Link>
           </div>
         </div>
       </div>

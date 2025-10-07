@@ -5,6 +5,7 @@ import Image from "next/image";
 import SplitText from "./SplitText";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
@@ -92,12 +93,16 @@ export default function HeroSection() {
 
         {/* Enhanced button layout */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-          <button className="btn-primary text-lg px-12 py-5">
-            {t("hero.cta.primary")}
-          </button>
-          <button className="btn-secondary text-lg px-12 py-5">
-            {t("hero.cta.secondary")}
-          </button>
+          <Link href="/destinations">
+            <button className="btn-primary text-lg px-12 py-5">
+              {t("hero.cta.primary")}
+            </button>
+          </Link>
+          <Link href="/about">
+            <button className="btn-secondary text-lg px-12 py-5">
+              {t("hero.cta.secondary")}
+            </button>
+          </Link>
         </div>
 
         {/* Visitor counter with glass effect */}

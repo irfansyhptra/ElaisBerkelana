@@ -69,11 +69,11 @@ const translations = {
     // Homepage Sections
     "home.featuredPrograms.title": "Program Unggulan",
     "home.featuredPrograms.description":
-      "Jelajahi program sosial kelapa sawit terpilih yang telah memberikan dampak positif nyata bagi masyarakat dan lingkungan di berbagai wilayah Indonesia.",
+      "Jelajahi program sosial kelapa sawit terpilih yang telah memberikan dampak nyata bagi masyarakat dan lingkungan di berbagai wilayah Indonesia.",
     "home.featuredPrograms.cta": "Lihat Semua Program",
     "home.latestDocumentation.title": "Dokumentasi Terbaru",
     "home.latestDocumentation.description":
-      "Catatan perjalanan terbaru dalam mendokumentasikan dampak positif industri kelapa sawit di berbagai wilayah Indonesia.",
+      "Catatan perjalanan terbaru dalam mendokumentasikan dampak industri kelapa sawit di berbagai wilayah Indonesia.",
     "home.latestDocumentation.cta": "Lihat Semua Dokumentasi",
     "home.videoDocumentation.title": "Video Dokumentasi",
     "home.videoDocumentation.description":
@@ -119,22 +119,25 @@ const translations = {
     // About Page
     "about.title": "Tentang Elaeis Berkelana",
     "about.subtitle":
-      "Mengungkap dampak positif kelapa sawit untuk masyarakat Indonesia",
+      "Mengungkap dampak kelapa sawit untuk masyarakat Indonesia",
     "about.welcome.title": "Selamat Datang di Misi Kami",
     "about.welcome.description1":
-      "Elaeis Berkelana adalah sebuah platform yang didedikasikan untuk mengungkap dan membagikan cerita nyata tentang dampak positif industri kelapa sawit terhadap kehidupan masyarakat Indonesia. Kami mengunjungi berbagai desa, perkebunan, dan komunitas untuk mendokumentasikan transformasi sosial dan ekonomi yang terjadi.",
+      "Elaeis Berkelana adalah sebuah platform yang didedikasikan untuk mengungkap dan membagikan cerita nyata tentang dampak industri kelapa sawit terhadap kehidupan masyarakat Indonesia. Kami mengunjungi berbagai desa, perkebunan, dan komunitas untuk mendokumentasikan transformasi sosial dan ekonomi yang terjadi.",
     "about.welcome.description2":
       "Melalui dokumentasi video, foto, dan wawancara mendalam, kami mengungkap bagaimana industri kelapa sawit telah memberikan kesempatan kerja, meningkatkan infrastruktur, dan memberdayakan ekonomi lokal di berbagai komunitas.",
     "about.welcome.description3":
-      "Tujuan kami adalah menampilkan sisi positif industri kelapa sawit yang berkelanjutan dan menginspirasi lebih banyak program sosial yang dapat mengangkat kesejahteraan masyarakat pedesaan.",
+      "Tujuan kami adalah menampilkan sisi industri kelapa sawit yang berkelanjutan dan menginspirasi lebih banyak program sosial yang dapat mengangkat kesejahteraan masyarakat pedesaan.",
     "about.welcome.cta": "Lihat Program Kami",
     "about.focus.title": "Fokus Program Kami",
-    "about.values.socialImpact.title": "Dampak Sosial Nyata",
+    "about.values.socialImpact.title": "Dampak Sosial (People)",
     "about.values.socialImpact.description":
-      "Mengukur dan mendokumentasikan perubahan positif dalam kehidupan masyarakat",
-    "about.values.economicEmpowerment.title": "Pemberdayaan Ekonomi",
+      "Mengukur dan mendokumentasikan perubahan dalam kehidupan masyarakat, pemberdayaan komunitas, peningkatan kesejahteraan, dan akses terhadap pendidikan serta kesehatan",
+    "about.values.environment.title": "Kelestarian Lingkungan (Planet)",
+    "about.values.environment.description":
+      "Memantau praktik berkelanjutan, konservasi keanekaragaman hayati, pengelolaan limbah ramah lingkungan, dan inovasi teknologi hijau dalam industri kelapa sawit",
+    "about.values.economicEmpowerment.title": "Pemberdayaan Ekonomi (Profit)",
     "about.values.economicEmpowerment.description":
-      "Mengenal lebih dekat kehidupan masyarakat desa",
+      "Mendokumentasikan peningkatan pendapatan petani, pertumbuhan ekonomi lokal, dan keberlanjutan usaha masyarakat desa",
     "about.values.stories.title": "Kisah di Balik Layar",
     "about.values.stories.description":
       "Berbagi pengalaman unik dan tak terlupakan",
@@ -271,11 +274,11 @@ const translations = {
     // Homepage Sections
     "home.featuredPrograms.title": "Featured Programs",
     "home.featuredPrograms.description":
-      "Explore selected palm oil social programs that have provided real positive impact for communities and environment across various regions in Indonesia.",
+      "Explore selected palm oil social programs that have provided real impact for communities and environment across various regions in Indonesia.",
     "home.featuredPrograms.cta": "View All Programs",
     "home.latestDocumentation.title": "Latest Documentation",
     "home.latestDocumentation.description":
-      "Latest travel notes documenting the positive impact of palm oil industry in various regions of Indonesia.",
+      "Latest travel notes documenting the impact of palm oil industry in various regions of Indonesia.",
     "home.latestDocumentation.cta": "View All Documentation",
     "home.videoDocumentation.title": "Video Documentation",
     "home.videoDocumentation.description":
@@ -320,23 +323,25 @@ const translations = {
 
     // About Page
     "about.title": "About Elaeis Berkelana",
-    "about.subtitle":
-      "Unveiling the positive impact of palm oil for Indonesian society",
+    "about.subtitle": "Unveiling the impact of palm oil for Indonesian society",
     "about.welcome.title": "Welcome to Our Mission",
     "about.welcome.description1":
-      "Elaeis Berkelana is a platform dedicated to uncovering and sharing real stories about the positive impact of the palm oil industry on the lives of Indonesian communities. We visit various villages, plantations, and communities to document the social and economic transformation that occurs.",
+      "Elaeis Berkelana is a platform dedicated to uncovering and sharing real stories about the impact of the palm oil industry on the lives of Indonesian communities. We visit various villages, plantations, and communities to document the social and economic transformation that occurs.",
     "about.welcome.description2":
       "Through video documentation, photos, and in-depth interviews, we reveal how the palm oil industry has provided job opportunities, improved infrastructure, and empowered local economies in various communities.",
     "about.welcome.description3":
-      "Our goal is to showcase the positive side of the sustainable palm oil industry and inspire more social programs that can improve the welfare of rural communities.",
+      "Our goal is to showcase the side of the sustainable palm oil industry and inspire more social programs that can improve the welfare of rural communities.",
     "about.welcome.cta": "View Our Programs",
     "about.focus.title": "Our Program Focus",
-    "about.values.socialImpact.title": "Real Social Impact",
+    "about.values.socialImpact.title": "Social Impact (People)",
     "about.values.socialImpact.description":
-      "Measuring and documenting positive changes in community life",
-    "about.values.economicEmpowerment.title": "Economic Empowerment",
+      "Measuring and documenting changes in community life, empowerment, welfare improvement, and access to education and healthcare",
+    "about.values.environment.title": "Environmental Sustainability (Planet)",
+    "about.values.environment.description":
+      "Monitoring sustainable practices, biodiversity conservation, eco-friendly waste management, and green technology innovation in palm oil industry",
+    "about.values.economicEmpowerment.title": "Economic Empowerment (Profit)",
     "about.values.economicEmpowerment.description":
-      "Getting to know village community life more closely",
+      "Documenting farmers' income improvement, local economic growth, and sustainability of village community businesses",
     "about.values.stories.title": "Behind the Scenes Stories",
     "about.values.stories.description":
       "Sharing unique and unforgettable experiences",
