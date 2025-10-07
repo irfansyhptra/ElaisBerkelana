@@ -135,7 +135,7 @@ const translations = {
     "about.values.environment.title": "Kelestarian Lingkungan (Planet)",
     "about.values.environment.description":
       "Memantau praktik berkelanjutan, konservasi keanekaragaman hayati, pengelolaan limbah ramah lingkungan, dan inovasi teknologi hijau dalam industri kelapa sawit",
-    "about.values.economicEmpowerment.title": "Pemberdayaan Ekonomi (Profit)",
+    "about.values.economicEmpowerment.title": "Kemakmuran (Prosperity)",
     "about.values.economicEmpowerment.description":
       "Mendokumentasikan peningkatan pendapatan petani, pertumbuhan ekonomi lokal, dan keberlanjutan usaha masyarakat desa",
     "about.values.stories.title": "Kisah di Balik Layar",
