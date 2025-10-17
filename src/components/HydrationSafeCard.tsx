@@ -7,7 +7,6 @@ import { Destination } from "@/types";
 import OptimizedImage from "./OptimizedImage";
 import { normalizeImagePath } from "@/utils/imageUtils";
 import {
-  getCountryBackgroundImage,
   getCountryGradientOverlay,
   getCountryAccentColor,
 } from "@/utils/backgroundUtils";
@@ -30,8 +29,38 @@ const HydrationSafeCard = ({
 
   const href = `/destinations/${destination.country._id}/${destination.province._id}/${destination.slug}`;
 
-  // Get dynamic styles - but only use them after hydration
-  const backgroundImage = getCountryBackgroundImage(destination.country._id);
+  // Get banner image from destination data (not country banner)
+  const getBannerImage = () => {
+    // Priority 1: Banner from destination
+    if (destination.banner) {
+      return normalizeImagePath(destination.banner);
+    }
+
+    // Priority 2: Cover image
+    if (destination.coverImage) {
+      return normalizeImagePath(destination.coverImage);
+    }
+
+    // Priority 3: First image in gallery/images array
+    if (destination.images?.[0]) {
+      return normalizeImagePath(destination.images[0]);
+    }
+
+    // Priority 4: First program image if available
+    if (destination.programs?.[0]?.images?.[0]) {
+      return normalizeImagePath(destination.programs[0].images[0]);
+    }
+
+    // Priority 5: Gallery images
+    if (destination.gallery?.[0]?.url) {
+      return normalizeImagePath(destination.gallery[0].url);
+    }
+
+    // Fallback
+    return "/images/destinations/indo.jpg";
+  };
+
+  const backgroundImage = getBannerImage();
   const gradientOverlay = getCountryGradientOverlay(destination.country._id);
   const accentColor = getCountryAccentColor(destination.country._id);
 
@@ -63,9 +92,7 @@ const HydrationSafeCard = ({
             {/* Main background */}
             <div className="absolute inset-0">
               <OptimizedImage
-                src={
-                  isClient ? backgroundImage : "/images/destinations/indo.jpg"
-                }
+                src={backgroundImage}
                 alt="Featured Banner"
                 fill
                 className="object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -145,9 +172,7 @@ const HydrationSafeCard = ({
             {/* Simple overlay */}
             <div className="absolute inset-0 opacity-20">
               <OptimizedImage
-                src={
-                  isClient ? backgroundImage : "/images/destinations/indo.jpg"
-                }
+                src={backgroundImage}
                 alt="Background"
                 fill
                 className="object-cover"
@@ -187,8 +212,8 @@ const HydrationSafeCard = ({
           {/* Background */}
           <div className="absolute inset-0">
             <OptimizedImage
-              src={isClient ? backgroundImage : "/images/destinations/indo.jpg"}
-              alt={`${destination.country.name} Banner`}
+              src={backgroundImage}
+              alt={`${destination.village} Banner`}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />

@@ -1,7 +1,6 @@
 // src/components/DestinationCard.tsx
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Destination } from "@/types";
 import OptimizedImage from "./OptimizedImage";
@@ -12,17 +11,12 @@ interface DestinationCardProps {
 }
 
 const DestinationCard = ({ destination }: DestinationCardProps) => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const href = `/destinations/${destination.country._id}/${destination.province._id}/${destination.slug}`;
 
-  // Prioritize banner image from form, fallback to cover image or first image
+  // Prioritize banner image from form data, fallback to cover image or first image
   const getBannerImage = () => {
-    if (!mounted) return "/images/destinations/indo.jpg";
+    // Always try to get image from destination data, even before mount
+    // This prevents flash of default image
 
     // First priority: banner image from form
     if (destination.banner) {
@@ -39,7 +33,17 @@ const DestinationCard = ({ destination }: DestinationCardProps) => {
       return normalizeImagePath(destination.images[0]);
     }
 
-    // Fallback
+    // Fourth priority: first program image
+    if (destination.programs?.[0]?.images?.[0]) {
+      return normalizeImagePath(destination.programs[0].images[0]);
+    }
+
+    // Fifth priority: gallery images
+    if (destination.gallery?.[0]?.url) {
+      return normalizeImagePath(destination.gallery[0].url);
+    }
+
+    // Only use fallback if no images available
     return "/images/destinations/indo.jpg";
   };
 
