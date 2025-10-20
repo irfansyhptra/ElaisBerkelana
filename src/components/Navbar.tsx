@@ -76,203 +76,282 @@ const Navbar = () => {
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           isScrolled || isMenuOpen
-            ? "glass-navbar-dark"
-            : "bg-gradient-to-b from-black/10 via-black/5 to-transparent backdrop-blur-sm"
+            ? "glass-navbar-dark shadow-2xl"
+            : "bg-gradient-to-b from-black/20 via-black/10 to-transparent backdrop-blur-md"
         }`}
       >
-        {/* Floating decorative elements */}
+        {/* Enhanced decorative elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
-            className={`absolute top-0 left-1/4 w-32 h-2 transition-all duration-500 ${
+            className={`absolute top-0 left-1/4 w-40 h-1 transition-all duration-500 ${
               isScrolled || isMenuOpen
-                ? "bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                : "bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                ? "bg-gradient-to-r from-transparent via-green-400/40 to-transparent"
+                : "bg-gradient-to-r from-transparent via-green-400/20 to-transparent"
             }`}
           ></div>
           <div
-            className={`absolute top-0 right-1/4 w-24 h-2 transition-all duration-500 ${
+            className={`absolute top-0 right-1/4 w-32 h-1 transition-all duration-500 ${
               isScrolled || isMenuOpen
-                ? "bg-gradient-to-r from-transparent via-green-400/30 to-transparent"
-                : "bg-gradient-to-r from-transparent via-green-400/20 to-transparent"
+                ? "bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                : "bg-gradient-to-r from-transparent via-white/15 to-transparent"
             }`}
           ></div>
         </div>
 
-        <div className="relative container mx-auto px-3 sm:px-4 md:px-6 py-3 sm:py-4">
-          <div className="flex justify-between items-center">
-            {/* Logo */}
-            <Link
-              href="/"
-              className={`text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-wider transition-all duration-300 hover:scale-105 flex-shrink-0 ${
-                isScrolled || isMenuOpen
-                  ? "bg-gradient-to-r from-white via-green-100 to-white bg-clip-text text-transparent hover:from-green-200 hover:via-white hover:to-green-200"
-                  : "bg-gradient-to-r from-white via-green-100 to-white bg-clip-text text-transparent hover:from-green-100 hover:via-white hover:to-green-100"
-              }`}
-            >
-              <span className="hidden sm:inline">ELAEIS BERKELANA</span>
-              <span className="sm:hidden">ELAEIS</span>
-            </Link>
-
-            {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
-              {navLinks.slice(1).map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`relative transition-all duration-300 group py-2 px-3 xl:px-4 hover:scale-105 text-sm xl:text-base ${
-                    isScrolled || isMenuOpen
-                      ? "text-white/95 hover:text-white"
-                      : "text-white/90 hover:text-white"
-                  }`}
-                >
-                  {/* Glass background on hover */}
-                  <div
-                    className={`absolute inset-0 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 border ${
-                      isScrolled || isMenuOpen
-                        ? "bg-white/15 border-white/30 group-hover:border-white/40 shadow-lg shadow-white/10"
-                        : "bg-white/10 border-white/20 group-hover:border-white/30"
-                    }`}
-                  ></div>
-                  <span className="relative z-10">{link.label}</span>
-                  <span
-                    className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-green-400 to-orange-400 
-                                   transition-all duration-300 group-hover:w-full group-hover:left-0"
-                  ></span>
-                </Link>
-              ))}
-
-              {/* Language Selector */}
-              <div className="ml-2">
-                <LanguageSelector variant="navbar" />
-              </div>
-            </div>
-
-            {/* Mobile Menu Button - Improved spacing */}
-            <div className="lg:hidden flex items-center gap-2">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`z-50 transition-all duration-300 glass-card p-2.5 sm:p-3 rounded-xl hover:scale-110 touch-manipulation ${
+        <div className="relative w-full">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16 sm:h-20 lg:h-24">
+              {/* Logo - Enhanced with better visibility */}
+              <Link
+                href="/"
+                className={`relative text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-extrabold tracking-wider transition-all duration-300 hover:scale-105 flex-shrink-0 z-50 group ${
                   isScrolled || isMenuOpen
-                    ? "text-white hover:text-green-200 border-white/30 hover:border-white/50 shadow-lg shadow-white/10"
-                    : "text-white hover:text-white/80 border-white/20 hover:border-white/40"
+                    ? "text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                    : "text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
                 }`}
-                aria-label="Toggle menu"
-                style={{ minWidth: "44px", minHeight: "44px" }}
+                style={{
+                  minWidth: "100px",
+                  maxWidth: "280px",
+                  textShadow:
+                    "0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(46, 125, 50, 0.3)",
+                }}
               >
-                {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-              </button>
+                {/* Glow effect on hover */}
+                <span className="absolute inset-0 bg-gradient-to-r from-green-400/0 via-green-400/20 to-green-400/0 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></span>
+
+                <span className="relative hidden sm:inline whitespace-nowrap">
+                  <span className="text-green-400">ELAEIS</span>
+                  <span className="text-yellow-300 ml-2">BERKELANA</span>
+                </span>
+                <span className="relative sm:hidden">
+                  <span className="text-green-400">ELAEIS</span>
+                </span>
+              </Link>
+
+              {/* Desktop Menu - Better spacing */}
+              <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 flex-shrink-0">
+                {navLinks.slice(1).map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`relative transition-all duration-300 group py-2 px-3 xl:px-4 hover:scale-105 text-sm xl:text-base whitespace-nowrap ${
+                      isScrolled || isMenuOpen
+                        ? "text-white/95 hover:text-white"
+                        : "text-white/90 hover:text-white"
+                    }`}
+                  >
+                    {/* Glass background on hover */}
+                    <div
+                      className={`absolute inset-0 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 border ${
+                        isScrolled || isMenuOpen
+                          ? "bg-white/15 border-white/30 group-hover:border-white/40 shadow-lg shadow-white/10"
+                          : "bg-white/10 border-white/20 group-hover:border-white/30"
+                      }`}
+                    ></div>
+                    <span className="relative z-10">{link.label}</span>
+                    <span
+                      className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-green-400 to-orange-400 
+                                     transition-all duration-300 group-hover:w-full group-hover:left-0"
+                    ></span>
+                  </Link>
+                ))}
+
+                {/* Language Selector */}
+                <div className="ml-2 xl:ml-4 flex-shrink-0">
+                  <LanguageSelector variant="navbar" />
+                </div>
+              </div>
+
+              {/* Mobile Menu Button - No overlap with logo */}
+              <div className="lg:hidden flex items-center flex-shrink-0">
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className={`relative z-50 transition-all duration-300 p-2 sm:p-2.5 rounded-xl hover:scale-110 active:scale-95 touch-manipulation ${
+                    isScrolled || isMenuOpen
+                      ? "bg-white/10 text-white hover:bg-white/20 border border-white/30 hover:border-white/50 shadow-lg shadow-black/20"
+                      : "bg-white/5 text-white hover:bg-white/10 border border-white/20 hover:border-white/40"
+                  }`}
+                  aria-label="Toggle menu"
+                  style={{
+                    minWidth: "44px",
+                    minHeight: "44px",
+                    marginLeft: "12px",
+                  }}
+                >
+                  <span className="flex items-center justify-center">
+                    {isMenuOpen ? (
+                      <X size={20} className="sm:w-6 sm:h-6" />
+                    ) : (
+                      <Menu size={20} className="sm:w-6 sm:h-6" />
+                    )}
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Enhanced Mobile Menu - Side Drawer */}
+      {/* Optimized Mobile Side Menu - Full Screen Premium Design */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
-            onClick={() => setIsMenuOpen(false)}
-          >
+          <>
+            {/* Backdrop with blur */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-md z-40"
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* Side Menu Drawer */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="absolute right-0 top-0 h-full w-[320px] max-w-[85vw] glass-card-liquid border-l border-white/20 rounded-l-3xl overflow-y-auto"
+              transition={{ type: "spring", stiffness: 280, damping: 30 }}
+              className="lg:hidden fixed right-0 top-0 h-full w-full max-w-sm z-50 overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close button */}
-              <div className="flex justify-end p-5 sm:p-6">
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className="glass-card p-2.5 rounded-xl hover:scale-110 transition-all duration-300 text-gray-700 hover:text-gray-900 touch-manipulation"
-                  style={{ minWidth: "44px", minHeight: "44px" }}
-                  aria-label="Close menu"
-                >
-                  <X size={24} />
-                </button>
-              </div>
+              {/* Glass background with gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white via-white/98 to-white/95 backdrop-blur-2xl"></div>
+              
+              {/* Decorative elements */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-green-400/20 to-transparent rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-yellow-400/20 to-transparent rounded-full blur-3xl"></div>
 
-              {/* Navigation Links with better spacing */}
-              <div className="px-4 sm:px-6 py-4 space-y-3">
-                {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+              {/* Content */}
+              <div className="relative h-full flex flex-col">
+                {/* Header with close button */}
+                <div className="flex items-center justify-between p-6 border-b border-gray-200/50">
+                  <div>
+                    <h2 className="text-xl font-bold bg-gradient-to-r from-green-600 to-green-500 bg-clip-text text-transparent">
+                      Menu
+                    </h2>
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      Elaeis Berkelana
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 active:scale-95 transition-all duration-200 text-gray-700 hover:text-gray-900 touch-manipulation group"
+                    style={{ minWidth: "44px", minHeight: "44px" }}
+                    aria-label="Close menu"
                   >
-                    <Link
-                      href={link.href}
-                      className="flex items-center gap-4 p-4 rounded-2xl glass-card-minimal hover:glass-card transition-all duration-300 group active:scale-95 touch-manipulation"
-                      onClick={() => setIsMenuOpen(false)}
-                      style={{ minHeight: "56px" }}
-                    >
-                      <link.icon
-                        size={22}
-                        className="text-green-600 group-hover:text-green-700 transition-colors flex-shrink-0"
-                      />
-                      <span className="text-gray-800 group-hover:text-gray-900 font-medium">
-                        {link.mobileLabel}
-                      </span>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
+                    <X size={22} className="group-hover:rotate-90 transition-transform duration-300" />
+                  </button>
+                </div>
 
-              {/* Language Selector in Mobile Menu */}
-              <div className="px-4 sm:px-6 py-4 mt-2">
-                <div className="glass-card-minimal p-4 rounded-2xl">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-gray-700 font-medium text-sm">
-                      {t("language.select")}
-                    </span>
-                    <LanguageSelector variant="minimal" />
+                {/* Navigation Links - Optimized */}
+                <div className="flex-1 overflow-y-auto px-4 py-6 space-y-2">
+                  {navLinks.map((link, index) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ 
+                        duration: 0.3, 
+                        delay: index * 0.08,
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20
+                      }}
+                    >
+                      <Link
+                        href={link.href}
+                        className="flex items-center gap-4 p-4 rounded-2xl bg-white/60 hover:bg-white border border-gray-200/50 hover:border-green-300 hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 group active:scale-98 touch-manipulation relative overflow-hidden"
+                        onClick={() => setIsMenuOpen(false)}
+                        style={{ minHeight: "64px" }}
+                      >
+                        {/* Hover gradient effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-green-50/0 via-green-50/50 to-green-50/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        
+                        {/* Icon with background */}
+                        <div className="relative z-10 p-3 rounded-xl bg-gradient-to-br from-green-500 to-green-600 group-hover:from-green-600 group-hover:to-green-700 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+                          <link.icon
+                            size={24}
+                            className="text-white"
+                            strokeWidth={2.5}
+                          />
+                        </div>
+                        
+                        {/* Label */}
+                        <div className="relative z-10 flex-1">
+                          <span className="text-base font-semibold text-gray-800 group-hover:text-green-700 transition-colors">
+                            {link.label}
+                          </span>
+                          <p className="text-xs text-gray-500 mt-0.5">
+                            {link.mobileLabel}
+                          </p>
+                        </div>
+
+                        {/* Arrow icon */}
+                        <div className="relative z-10 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0 group-hover:translate-x-1">
+                          <svg 
+                            width="20" 
+                            height="20" 
+                            viewBox="0 0 20 20" 
+                            fill="none" 
+                            className="text-green-600"
+                          >
+                            <path 
+                              d="M7.5 15L12.5 10L7.5 5" 
+                              stroke="currentColor" 
+                              strokeWidth="2" 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Footer with Language Selector */}
+                <div className="p-4 border-t border-gray-200/50 bg-gradient-to-t from-gray-50/50 to-transparent">
+                  <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-gray-200/50 shadow-sm">
+                    <div className="flex items-center justify-between gap-3 mb-3">
+                      <div className="flex items-center gap-2">
+                        <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600">
+                          <svg 
+                            width="16" 
+                            height="16" 
+                            viewBox="0 0 24 24" 
+                            fill="none" 
+                            className="text-white"
+                          >
+                            <path 
+                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" 
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </div>
+                        <span className="text-sm font-semibold text-gray-700">
+                          {t("language.select")}
+                        </span>
+                      </div>
+                      <LanguageSelector variant="minimal" />
+                    </div>
+                    
+                    {/* Footer info */}
+                    <div className="text-center pt-3 border-t border-gray-200/50">
+                      <p className="text-xs font-semibold text-gray-700">
+                        Elaeis Berkelana
+                      </p>
+                      <p className="text-[10px] text-gray-500 mt-1">
+                        {t("footer.description")}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              {/* Footer with better positioning */}
-              <div className="px-4 sm:px-6 pb-6 mt-auto">
-                <div className="glass-card-minimal p-4 text-center rounded-2xl">
-                  <p className="text-sm text-gray-600 font-medium">
-                    Elaeis Berkelana
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1 leading-relaxed">
-                    {t("footer.description")}
-                  </p>
-                </div>
-              </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
-
-      {/* Mobile Bottom Navigation - Improved spacing and touch targets */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 glass-navbar-dark border-t border-white/10 safe-area-bottom">
-        <div className="grid grid-cols-5 gap-0.5 py-2 px-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="flex flex-col items-center justify-center py-3 px-2 transition-all duration-200 active:bg-white/20 active:scale-95 rounded-xl mx-0.5 touch-manipulation hover:bg-white/10"
-              style={{ minWidth: "60px", minHeight: "56px" }}
-            >
-              <link.icon
-                size={20}
-                className="text-white/90 mb-1.5 flex-shrink-0"
-              />
-              <span className="text-[10px] sm:text-xs text-white/80 text-center leading-tight font-medium">
-                {link.mobileLabel}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
     </>
   );
 };
