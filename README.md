@@ -64,7 +64,7 @@ bun dev
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15.5.3 dengan App Router
+- **Framework**: Next.js 15.5.3 dengan App Routerr
 - **Styling**: Tailwind CSS dengan custom glassmorphism components
 - **Animations**: Framer Motion & GSAP
 - **UI Components**: Custom glass components dengan Headless UI
