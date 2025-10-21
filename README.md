@@ -133,6 +133,5 @@ Kami terbuka untuk kontribusi dalam bentuk:
 
 Project ini dilisensikan under MIT License - lihat file [LICENSE](LICENSE) untuk detail.
 
----
 
 *"Berkelana bukan hanya tentang perjalanan fisik, tetapi juga perjalanan memahami dampak nyata industri kelapa sawit bagi masyarakat Indonesia."*
