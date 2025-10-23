@@ -74,9 +74,22 @@ const SocialEmbed = ({ socialMedia }: SocialEmbedProps) => {
   };
 
   const getInstagramPostId = (url: string) => {
-    // Extract post ID from Instagram URL
-    const match = url.match(/\/p\/([A-Za-z0-9_-]+)/);
-    return match ? match[1] : null;
+    // Extract post ID from Instagram URL (both /p/ for posts and /reel/ for reels)
+    const postMatch = url.match(/\/p\/([A-Za-z0-9_-]+)/);
+    const reelMatch = url.match(/\/reel\/([A-Za-z0-9_-]+)/);
+    const reelsMatch = url.match(/\/reels\/([A-Za-z0-9_-]+)/); // Handle /reels/ variant
+    return postMatch
+      ? postMatch[1]
+      : reelMatch
+      ? reelMatch[1]
+      : reelsMatch
+      ? reelsMatch[1]
+      : null;
+  };
+
+  const isInstagramReel = (url: string) => {
+    // Check if URL is an Instagram Reel (handle both /reel/ and /reels/)
+    return url.includes("/reel/") || url.includes("/reels/");
   };
 
   const getTikTokVideoId = (url: string) => {
@@ -199,9 +212,89 @@ const SocialEmbed = ({ socialMedia }: SocialEmbedProps) => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {socialMedia.instagram.map((url, index) => {
                 const postId = getInstagramPostId(url);
+                const isReel = isInstagramReel(url);
+
                 return (
                   <div key={index} className="max-w-sm mx-auto">
-                    {postId ? (
+                    {isReel ? (
+                      // Instagram Reels - Show button to redirect
+                      <div className="relative aspect-[9/16] max-w-sm mx-auto bg-gradient-to-br from-purple-900 via-pink-800 to-orange-700 rounded-2xl overflow-hidden shadow-2xl">
+                        {/* Instagram gradient background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-pink-600/20 to-orange-600/20 backdrop-blur-sm"></div>
+
+                        {/* Content */}
+                        <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
+                          {/* Instagram Reels Icon */}
+                          <div className="mb-6">
+                            <svg
+                              className="w-20 h-20 text-white drop-shadow-lg"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12.823 1l2.974 5.002h-5.58l-2.65-4.971c.206-.013.419-.022.642-.027L8.55 1zm2.327 0h.298c3.06 0 4.468.754 5.64 1.887a6.007 6.007 0 011.596 2.82l.07.295h-4.629zm3.2 7.988a5.008 5.008 0 01.303-.27c.556-.453 1.126-.808 1.747-1.06l.677-.27v11.364l-.942-1.675c-1.046-1.858-2.015-2.843-3.494-3.548zm-1.673 1.012H7.227c-.012 1.965-.03 3.61-.025 5.038.01 1.985.082 3.487.312 4.623.22 1.076.558 1.885 1.146 2.663C9.426 23.116 10.82 24 12.867 24c.58 0 1.075-.066 1.522-.19.924-.255 1.628-.745 2.15-1.425.577-.753.98-1.73 1.24-2.94.286-1.314.409-2.86.412-4.662.002-1.348-.006-2.857-.017-4.538zm-8.835-2.007l.002-.02h-.018l.016.02zm8.835 2.007zm6.724-3.012h-4.23l2.117-3.77c.447.46.84.968 1.14 1.48-.013.016-.022.033-.036.048a6.658 6.658 0 01-1.166.958c-.374.252-.752.475-1.127.684l-1.675-.348h-2.01l3.986-7.014h2.01l2.117 3.77a9.96 9.96 0 01-.606 1.512 7.473 7.473 0 01-.52.83z" />
+                            </svg>
+                          </div>
+
+                          {/* Title */}
+                          <h4 className="text-white font-bold text-xl mb-2 drop-shadow-md">
+                            Instagram Reels
+                          </h4>
+
+                          {/* Description */}
+                          <p className="text-white/90 text-sm mb-6 leading-relaxed drop-shadow">
+                            Klik tombol di bawah untuk menonton Reels ini di
+                            Instagram
+                          </p>
+
+                          {/* Button */}
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-900 font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 active:scale-95 transition-all duration-300"
+                          >
+                            {/* Button glow effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-orange-500 rounded-full opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
+
+                            {/* Instagram icon */}
+                            <svg
+                              className="w-6 h-6 relative"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+
+                            <span className="relative">Buka di Instagram</span>
+
+                            {/* Arrow icon */}
+                            <svg
+                              className="w-5 h-5 relative group-hover:translate-x-1 transition-transform duration-300"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2.5}
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"
+                              />
+                            </svg>
+                          </a>
+
+                          {/* Small info text */}
+                          <p className="text-white/60 text-xs mt-4 drop-shadow">
+                            Reels #{index + 1}
+                          </p>
+                        </div>
+
+                        {/* Decorative elements */}
+                        <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full blur-2xl"></div>
+                        <div className="absolute bottom-4 left-4 w-16 h-16 bg-pink-500/20 rounded-full blur-xl"></div>
+                      </div>
+                    ) : postId ? (
+                      // Regular Instagram Post - Show embed
                       <blockquote
                         className="instagram-media"
                         data-instgrm-permalink={url}
@@ -238,6 +331,7 @@ const SocialEmbed = ({ socialMedia }: SocialEmbedProps) => {
                         </div>
                       </blockquote>
                     ) : (
+                      // Invalid URL
                       <div className="aspect-square max-w-sm mx-auto bg-gray-800 rounded-lg flex items-center justify-center">
                         <p className="text-white/60">Invalid Instagram URL</p>
                       </div>
